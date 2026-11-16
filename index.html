@@ -110,13 +110,13 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
 /* Realistic Woven Tibetan Prayer Flags (Lungta) */
 .lungta-wrap{
   position:relative;overflow:hidden;
-  padding:2px 0 4px;
+  padding:0;
   perspective:900px;
 }
 .lungta-svg{
-  display:block;width:100%;height:74px;
+  display:block;width:100%;height:78px;
   margin:0 auto;
-  filter:drop-shadow(0 6px 8px rgba(15,23,42,.18));
+  filter:drop-shadow(0 5px 7px rgba(15,23,42,.18));
 }
 .cloth-flag{
   transform-box:fill-box;
@@ -127,9 +127,9 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
 .cloth-flag:nth-child(3n){animation-duration:4.6s;animation-delay:-1.9s}
 .cloth-flag:nth-child(4n){animation-duration:3.9s;animation-delay:-2.7s}
 @keyframes realWind{
-  0%{transform:rotateX(3deg) rotateY(-4deg) skewX(-1.5deg)}
-  50%{transform:rotateX(10deg) rotateY(7deg) skewX(3.5deg) translateY(1px)}
-  100%{transform:rotateX(4deg) rotateY(-6deg) skewX(-2.5deg)}
+  0%{transform:rotateX(2deg) rotateY(-3deg) skewX(-1deg)}
+  50%{transform:rotateX(9deg) rotateY(6deg) skewX(3deg)}
+  100%{transform:rotateX(3deg) rotateY(-5deg) skewX(-2deg)}
 }
 
 /* Material Buttons & Ripple */
@@ -175,8 +175,8 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
   .himalaya-card:hover .himalaya-photo{transform:scale(1.04)}
 }
 
-/* Hero (uses padding-top/bottom only so .wrap horizontal padding is preserved!) */
-.hero{padding-top:26px;padding-bottom:38px;display:grid;grid-template-columns:1.06fr 1fr;gap:42px;align-items:center;position:relative}
+/* Hero */
+.hero{padding-top:24px;padding-bottom:38px;display:grid;grid-template-columns:1.06fr 1fr;gap:42px;align-items:center;position:relative}
 .badge-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
 .badge-pill{
   display:inline-flex;align-items:center;gap:8px;
@@ -446,7 +446,7 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
   nav .wrap{height:58px;gap:8px;padding-left:16px;padding-right:16px}
   nav .btn{padding:8px 14px;min-height:40px;font-size:13.5px}
   .mob-drawer{top:calc(64px + env(safe-area-inset-top,0px))}
-  .lungta-svg{height:60px}
+  .lungta-svg{height:64px}
   section{padding:48px 0}
   .hero{padding-top:14px;padding-bottom:30px;gap:24px}
   .hero h1{min-height:2.05em;margin-bottom:12px}
@@ -525,12 +525,13 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
 
 <!-- Realistic Woven Tibetan Prayer Flags (Lungta) -->
 <div class="lungta-wrap" aria-hidden="true">
-  <svg class="lungta-svg" viewBox="0 0 1200 78" preserveAspectRatio="xMidYMin slice">
+  <svg class="lungta-svg" id="lungtaSvg" viewBox="0 0 1200 78" preserveAspectRatio="xMidYMin slice">
     <defs>
-      <filter id="cottonWeave" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0" in="noise" result="grain"/>
-        <feComposite in="SourceGraphic" in2="grain" operator="over"/>
+      <filter id="cottonWeave" x="-2%" y="-2%" width="104%" height="104%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.11 0" in="noise" result="darkGrain"/>
+        <feComposite in="darkGrain" in2="SourceAlpha" operator="in" result="maskedGrain"/>
+        <feComposite in="maskedGrain" in2="SourceGraphic" operator="over"/>
       </filter>
       <linearGradient id="foldShade" x1="0" y1="0" x2="1" y2="0.4">
         <stop offset="0%" stop-color="#fff" stop-opacity=".18"/>
@@ -540,8 +541,8 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
         <stop offset="100%" stop-color="#fff" stop-opacity=".08"/>
       </linearGradient>
     </defs>
-    <path d="M-10,6 Q300,24 600,10 T1210,7" fill="none" stroke="#8c755b" stroke-width="2.4"/>
-    <path d="M-10,6 Q300,24 600,10 T1210,7" fill="none" stroke="#c8b49b" stroke-width="1" stroke-dasharray="4 4"/>
+    <path id="hempBase" fill="none" stroke="#7d674f" stroke-width="2.6"/>
+    <path id="hempTwist" fill="none" stroke="#c8b49b" stroke-width="1" stroke-dasharray="4 4"/>
     <g id="flagsGroup" filter="url(#cottonWeave)"></g>
   </svg>
 </div>
@@ -640,8 +641,9 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
 
       <div class="mq" aria-label="Organisations I have worked with">
         <div>
-          <span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR – NRCO</span><span>Mim Dance Academy</span><span>Tashi Delek</span><span>Sikkim University</span><span>SPSC</span>
-          <span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR – NRCO</span><span>Mim Dance Academy</span><span>Tashi Delek</span><span>Sikkim University</span><span>SPSC</span></div>
+          <span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR – NRCO</span><span>Mim Dance Academy</span>
+          <span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR – NRCO</span><span>Mim Dance Academy</span>
+        </div>
       </div>
 
       <div class="slidewrap">
@@ -1044,30 +1046,41 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
 
 <script>
 (function(){
-  /* Render Realistic Woodblock-Printed Woven Tibetan Prayer Flags (Lungta) */
+  /* Render Realistic Woodblock-Printed Woven Tibetan Prayer Flags (Lungta)
+     Both the hemp rope AND every flag's top corners share the exact same ropeY(x) function */
   var fg=document.getElementById("flagsGroup");
   if(fg){
+    function ropeY(x){
+      return 6 + 13 * Math.sin(Math.max(0, Math.min(1, x / 1200)) * Math.PI);
+    }
+    var ropePts=[];
+    for(var rx=-10;rx<=1210;rx+=12){
+      ropePts.push((rx===-10?"M":"L")+rx+","+ropeY(rx).toFixed(2));
+    }
+    var ropeD=ropePts.join(" ");
+    document.getElementById("hempBase").setAttribute("d",ropeD);
+    document.getElementById("hempTwist").setAttribute("d",ropeD);
+
     var dyes=[
-      {bg:"#1e4e9c",ink:"rgba(15,15,20,0.62)"},
-      {bg:"#f1ecdf",ink:"rgba(25,25,30,0.60)"},
-      {bg:"#b92b27",ink:"rgba(15,15,20,0.65)"},
-      {bg:"#1c7c54",ink:"rgba(15,15,20,0.64)"},
-      {bg:"#e09619",ink:"rgba(20,20,25,0.62)"}
+      {bg:"#1e4e9c",ink:"rgba(12,12,18,0.62)"},
+      {bg:"#f1ecdf",ink:"rgba(22,22,28,0.60)"},
+      {bg:"#b92b27",ink:"rgba(12,12,18,0.65)"},
+      {bg:"#1c7c54",ink:"rgba(12,12,18,0.64)"},
+      {bg:"#e09619",ink:"rgba(18,18,22,0.62)"}
     ],svgNS="http://www.w3.org/2000/svg";
 
     for(var i=0;i<25;i++){
-      var x=4+i*48, t=(i%12)/12;
-      var y=7+Math.sin(t*Math.PI)*9;
+      var x=6+i*48, w=42, h=46;
+      var yL=ropeY(x), yR=ropeY(x+w), yM=(yL+yR)/2;
       var d=dyes[i%5];
       var g=document.createElementNS(svgNS,"g");
       g.setAttribute("class","cloth-flag");
 
       var cloth=document.createElementNS(svgNS,"path");
-      var w=43, h=46;
-      var pathD="M"+x+","+y+" L"+(x+w)+","+(y+1)+" L"+(x+w-1)+","+(y+h-2)+" "+
-                "L"+(x+w*0.8)+","+(y+h)+" L"+(x+w*0.62)+","+(y+h-3)+" "+
-                "L"+(x+w*0.42)+","+(y+h)+" L"+(x+w*0.2)+","+(y+h-2)+" "+
-                "L"+(x+1)+","+(y+h)+" Z";
+      var pathD="M"+x+","+yL.toFixed(1)+" L"+(x+w)+","+yR.toFixed(1)+" L"+(x+w-0.8)+","+(yR+h-2).toFixed(1)+" "+
+                "L"+(x+w*0.8)+","+(yM+h).toFixed(1)+" L"+(x+w*0.62)+","+(yM+h-3).toFixed(1)+" "+
+                "L"+(x+w*0.42)+","+(yM+h).toFixed(1)+" L"+(x+w*0.2)+","+(yM+h-2).toFixed(1)+" "+
+                "L"+(x+0.8)+","+(yL+h).toFixed(1)+" Z";
       cloth.setAttribute("d",pathD);
       cloth.setAttribute("fill",d.bg);
 
@@ -1076,8 +1089,8 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
       shade.setAttribute("fill","url(#foldShade)");
 
       var frame=document.createElementNS(svgNS,"rect");
-      frame.setAttribute("x",x+4.5); frame.setAttribute("y",y+5);
-      frame.setAttribute("width",w-10); frame.setAttribute("height",h-12);
+      frame.setAttribute("x",x+4.5); frame.setAttribute("y",(yM+5).toFixed(1));
+      frame.setAttribute("width",w-9); frame.setAttribute("height",h-12);
       frame.setAttribute("fill","none");
       frame.setAttribute("stroke",d.ink); frame.setAttribute("stroke-width","0.75");
 
@@ -1085,25 +1098,29 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
       inkGroup.setAttribute("stroke",d.ink);
       inkGroup.setAttribute("stroke-width","0.7");
       inkGroup.setAttribute("stroke-linecap","round");
-      [8,11,14,32,35,38].forEach(function(dy,idx){
+      [8.5,11.5,14.5,32,35,38].forEach(function(dy,idx){
         var ln=document.createElementNS(svgNS,"line");
-        ln.setAttribute("x1",x+7); ln.setAttribute("y1",y+dy);
-        ln.setAttribute("x2",x+w-(idx%2?8:10)); ln.setAttribute("y2",y+dy);
+        ln.setAttribute("x1",x+7); ln.setAttribute("y1",(yM+dy).toFixed(1));
+        ln.setAttribute("x2",x+w-(idx%2?7.5:9.5)); ln.setAttribute("y2",(yM+dy).toFixed(1));
         ln.setAttribute("stroke-dasharray",idx%2?"2 1.2 4 1":"3 1.5 2 1");
         inkGroup.appendChild(ln);
       });
 
+      var cx=x+w/2, cy=yM+23;
       var stamp=document.createElementNS(svgNS,"circle");
-      stamp.setAttribute("cx",x+w/2-0.5); stamp.setAttribute("cy",y+23); stamp.setAttribute("r","6.5");
+      stamp.setAttribute("cx",cx); stamp.setAttribute("cy",cy.toFixed(1)); stamp.setAttribute("r","6.2");
       stamp.setAttribute("fill","none"); stamp.setAttribute("stroke",d.ink); stamp.setAttribute("stroke-width","0.85");
       var cross=document.createElementNS(svgNS,"path");
-      var cx=x+w/2-0.5, cy=y+23;
-      cross.setAttribute("d","M"+(cx-4)+","+cy+" L"+(cx+4)+","+cy+" M"+cx+","+(cy-4)+" L"+cx+","+(cy+4)+" M"+(cx-2.5)+","+(cy-2.5)+" L"+(cx+2.5)+","+(cy+2.5)+" M"+(cx+2.5)+","+(cy-2.5)+" L"+(cx-2.5)+","+(cy+2.5));
+      cross.setAttribute("d","M"+(cx-4)+","+cy.toFixed(1)+" L"+(cx+4)+","+cy.toFixed(1)+" M"+cx+","+(cy-4).toFixed(1)+" L"+cx+","+(cy+4).toFixed(1)+" M"+(cx-2.5)+","+(cy-2.5).toFixed(1)+" L"+(cx+2.5)+","+(cy+2.5).toFixed(1)+" M"+(cx+2.5)+","+(cy-2.5).toFixed(1)+" L"+(cx-2.5)+","+(cy+2.5).toFixed(1));
       cross.setAttribute("stroke",d.ink); cross.setAttribute("stroke-width","0.7");
 
-      var tie=document.createElementNS(svgNS,"circle");
-      tie.setAttribute("cx",x+2); tie.setAttribute("cy",y+1); tie.setAttribute("r","1.5");
-      tie.setAttribute("fill","#735f48");
+      /* Both top corner ties anchored right onto the rope */
+      var tieL=document.createElementNS(svgNS,"circle");
+      tieL.setAttribute("cx",x+1.2); tieL.setAttribute("cy",yL.toFixed(1)); tieL.setAttribute("r","1.6");
+      tieL.setAttribute("fill","#6b5742");
+      var tieR=document.createElementNS(svgNS,"circle");
+      tieR.setAttribute("cx",x+w-1.2); tieR.setAttribute("cy",yR.toFixed(1)); tieR.setAttribute("r","1.6");
+      tieR.setAttribute("fill","#6b5742");
 
       g.appendChild(cloth);
       g.appendChild(shade);
@@ -1111,7 +1128,8 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
       g.appendChild(inkGroup);
       g.appendChild(stamp);
       g.appendChild(cross);
-      g.appendChild(tie);
+      g.appendChild(tieL);
+      g.appendChild(tieR);
       fg.appendChild(g);
     }
   }
