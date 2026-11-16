@@ -1,270 +1,1061 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pritz — Web Developer for Hire</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0e1030;--bg2:#161a4a;--ink:#f3f1ff;--mute:#a9aed8;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--v:#7b5cff;--m:#2ee6a6;--a:#ffb547;--on-v:#fff;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f2ff;--bg2:#e6e1ff;--ink:#14163d;--mute:#545a8c;--card:rgba(255,255,255,.75);--line:rgba(20,22,61,.15);--v:#5b3df5;--m:#0aa877;--a:#c77700;color-scheme:light}}
-:root[data-theme="light"]{--bg:#f4f2ff;--bg2:#e6e1ff;--ink:#14163d;--mute:#545a8c;--card:rgba(255,255,255,.75);--line:rgba(20,22,61,.15);--v:#5b3df5;--m:#0aa877;--a:#c77700;color-scheme:light}
-:root[data-theme="dark"]{--bg:#0e1030;--bg2:#161a4a;--ink:#f3f1ff;--mute:#a9aed8;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--v:#7b5cff;--m:#2ee6a6;--a:#ffb547;color-scheme:dark}
-html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+:root,
+:root[data-theme="light"]{
+  --bg:#f6f5ff;
+  --bg2:#ece9fe;
+  --surface:#ffffff;
+  --surface-2:#f1efff;
+  --ink:#14163b;
+  --mute:#565c87;
+  --card:rgba(255,255,255,.88);
+  --line:rgba(20,22,59,.10);
+  --v:#5b3df5;
+  --v2:#8b5cf6;
+  --m:#06b684;
+  --a:#f59e0b;
+  --pink:#ec4899;
+  --elev-1:0 2px 10px rgba(20,22,59,.05),0 1px 3px rgba(20,22,59,.06);
+  --elev-2:0 12px 32px -8px rgba(91,61,245,.16),0 4px 12px rgba(20,22,59,.05);
+  --elev-3:0 24px 54px -16px rgba(91,61,245,.26),0 8px 20px rgba(20,22,59,.08);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+:root[data-theme="dark"]{
+  --bg:#0b0d26;
+  --bg2:#151842;
+  --surface:#14173d;
+  --surface-2:#1c2052;
+  --ink:#f4f3ff;
+  --mute:#a6acd6;
+  --card:rgba(22,26,70,.78);
+  --line:rgba(255,255,255,.12);
+  --v:#7b5cff;
+  --v2:#a78bfa;
+  --m:#2ee6a6;
+  --a:#ffb547;
+  --pink:#ff5c97;
+  --elev-1:0 4px 14px rgba(0,0,0,.28);
+  --elev-2:0 16px 36px -10px rgba(0,0,0,.48);
+  --elev-3:0 28px 60px -16px rgba(0,0,0,.65);
+  color-scheme:dark;
+}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 74px)}
 *{box-sizing:border-box}
-body{margin:0;font-family:"Public Sans",system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
+body{
+  margin:0;
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+  transition:background .35s ease,color .35s ease;
+}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
-.glow{position:fixed;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--v),transparent 65%);opacity:.28;pointer-events:none;transform:translate(-50%,-50%);left:50%;top:30%;z-index:0;transition:left .25s ease-out,top .25s ease-out}
-.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.25;z-index:0;pointer-events:none;animation:float 14s ease-in-out infinite alternate}
-.o1{width:380px;height:380px;background:var(--m);right:-120px;top:20%}
-.o2{width:320px;height:320px;background:var(--a);left:-100px;bottom:5%;animation-delay:-6s}
-@keyframes float{to{transform:translate(40px,-60px) scale(1.15)}}
+.ms{font-family:"Material Symbols Rounded";font-weight:normal;font-style:normal;font-size:20px;line-height:1;letter-spacing:normal;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;user-select:none}
+
+/* Background Atmosphere */
+.glow{position:fixed;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--v) 34%,transparent),transparent 65%);opacity:.42;pointer-events:none;transform:translate(-50%,-50%);left:50%;top:25%;z-index:0;transition:left .22s ease-out,top .22s ease-out}
+.orb{position:fixed;border-radius:50%;filter:blur(95px);opacity:.26;z-index:0;pointer-events:none;animation:float 14s ease-in-out infinite alternate}
+.o1{width:420px;height:420px;background:var(--m);right:-130px;top:14%}
+.o2{width:360px;height:360px;background:var(--a);left:-120px;bottom:8%;animation-delay:-6s}
+.o3{width:300px;height:300px;background:var(--pink);right:18%;bottom:-100px;opacity:.16;animation-delay:-3s}
+@keyframes float{to{transform:translate(45px,-60px) scale(1.16)}}
 main,header,footer{position:relative;z-index:1}
-.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;gap:20px;height:62px}
-.logo{font-weight:800;font-size:20px;letter-spacing:-.02em;margin-right:auto}
-.logo b{color:var(--m)}
-nav a{color:var(--mute);text-decoration:none;font-weight:500;font-size:15px}
-nav a:hover{color:var(--ink)}
-.btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:700;padding:13px 24px;border-radius:12px;background:linear-gradient(135deg,var(--v),#a45cff);color:#fff;text-decoration:none;box-shadow:0 10px 30px -10px var(--v);transition:transform .2s,box-shadow .2s}
-.btn:hover{transform:translateY(-3px);box-shadow:0 16px 36px -10px var(--v)}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.icon{background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;width:38px;height:38px;cursor:pointer;font-size:16px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+
+/* Progress bar */
+#prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3.5px;width:0;background:linear-gradient(90deg,var(--m),var(--v),var(--a));z-index:70;border-radius:0 99px 99px 0}
+
+/* Navigation - Material Top App Bar */
+nav{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  backdrop-filter:blur(18px) saturate(160%);
+  background:color-mix(in srgb,var(--surface) 78%,transparent);
+  border-bottom:1px solid var(--line);
+  box-shadow:var(--elev-1);
+}
+nav .wrap{display:flex;align-items:center;gap:18px;height:66px}
+.logo{font-weight:800;font-size:21px;letter-spacing:-.03em;margin-right:auto;display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.logo-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--v),var(--m));color:#fff;display:grid;place-items:center;font-size:17px;box-shadow:0 6px 16px -4px color-mix(in srgb,var(--v) 65%,transparent)}
+.logo b{color:var(--v)}
+nav a.h{color:var(--mute);text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 12px;border-radius:99px;transition:.2s}
+nav a.h:hover{color:var(--ink);background:var(--surface-2)}
+
+/* Material Buttons & Ripple */
+.btn{
+  position:relative;overflow:hidden;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;
+  padding:13px 24px;border-radius:999px;
+  background:linear-gradient(135deg,var(--v),var(--v2));
+  color:#fff;text-decoration:none;
+  box-shadow:0 10px 26px -8px color-mix(in srgb,var(--v) 68%,transparent);
+  transition:transform .22s cubic-bezier(.2,.9,.3,1.2),box-shadow .22s ease;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 16px 34px -8px color-mix(in srgb,var(--v) 75%,transparent)}
+.btn:active{transform:scale(.97)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.32),transparent 70%);transform:translateX(-125%);animation:sh 4s infinite}
+@keyframes sh{to{transform:translateX(125%)}}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--elev-1)}
+.btn.ghost:hover{border-color:var(--v);box-shadow:var(--elev-2)}
+.btn.ghost::after{display:none}
+.btn.mint{background:linear-gradient(135deg,#059669,var(--m));box-shadow:0 10px 26px -8px color-mix(in srgb,var(--m) 65%,transparent)}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:rip .6s linear;background:rgba(255,255,255,.42);pointer-events:none}
+@keyframes rip{to{transform:scale(4);opacity:0}}
+
+.icon{
+  background:var(--surface);border:1px solid var(--line);color:var(--ink);
+  border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px;
+  display:inline-grid;place-items:center;box-shadow:var(--elev-1);transition:.22s;
+}
+.icon:hover{transform:rotate(18deg) scale(1.06);border-color:var(--v)}
 :focus-visible{outline:3px solid var(--m);outline-offset:3px}
-.hero{padding:70px 0 40px;display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
-.hero h1{font-size:clamp(38px,6vw,68px);line-height:1.03;letter-spacing:-.035em;margin:0 0 18px;font-weight:800}
-.grad{background:linear-gradient(100deg,var(--m),var(--v) 55%,var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shift 6s linear infinite}
-@keyframes shift{to{background-position:200% 0}}
+
+/* Hero */
+.hero{padding:64px 0 46px;display:grid;grid-template-columns:1.06fr 1fr;gap:46px;align-items:center;position:relative}
+.badge-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--line);
+  box-shadow:var(--elev-1);font-size:13px;font-weight:700;color:var(--v);
+  margin-bottom:18px;
+}
+.pulse-dot{width:9px;height:9px;border-radius:50%;background:var(--m);box-shadow:0 0 0 0 color-mix(in srgb,var(--m) 70%,transparent);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font-size:clamp(38px,5.5vw,64px);line-height:1.05;letter-spacing:-.04em;margin:0 0 18px;font-weight:800;min-height:2.2em}
+.grad{background:linear-gradient(100deg,var(--m),var(--v) 50%,var(--pink),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% 100%;animation:shift 6s linear infinite}
+@keyframes shift{to{background-position:220% 0}}
+.caret{display:inline-block;width:4px;height:.82em;background:var(--v);margin-left:4px;vertical-align:-.06em;border-radius:4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
 .hero p{color:var(--mute);font-size:18px;max-width:46ch;margin:0 0 28px}
 .row{display:flex;gap:12px;flex-wrap:wrap}
-.stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap}
-.stats b{display:block;font-size:28px;letter-spacing:-.02em}
-.stats span{color:var(--mute);font-size:14px}
-.studio{border:1px solid var(--line);border-radius:18px;background:var(--card);backdrop-filter:blur(12px);overflow:hidden;box-shadow:0 30px 70px -30px #000}
-.bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line);align-items:center}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:32px}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--elev-1);backdrop-filter:blur(10px);display:flex;align-items:center;gap:12px;transition:.25s}
+.stat-card:hover{transform:translateY(-4px);box-shadow:var(--elev-2);border-color:color-mix(in srgb,var(--v) 40%,transparent)}
+.stat-ic{width:38px;height:38px;border-radius:12px;background:var(--surface-2);color:var(--v);display:grid;place-items:center;flex-shrink:0}
+.stat-card b{display:block;font-size:24px;line-height:1.1;letter-spacing:-.02em}
+.stat-card span{color:var(--mute);font-size:12.5px;font-weight:600}
+
+/* Hero Visual & Studio */
+.hero-visual{position:relative}
+.studio{
+  border:1px solid var(--line);border-radius:24px;
+  background:var(--surface);overflow:hidden;
+  box-shadow:var(--elev-3);
+  transform:perspective(1000px) rotateY(-2deg) rotateX(1deg);
+  transition:transform .4s ease;
+}
+.studio:hover{transform:perspective(1000px) rotateY(0) rotateX(0)}
+.bar{display:flex;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line);align-items:center;background:var(--surface-2)}
 .bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.bar i:nth-child(2){background:#febc2e}.bar i:nth-child(3){background:#28c840}
-.bar em{margin-left:10px;font-size:12px;color:var(--mute);font-style:normal}
-.split{display:grid;grid-template-columns:1fr 1fr;min-height:290px}
-pre{margin:0;padding:16px;font:12.5px/1.65 ui-monospace,Menlo,Consolas,monospace;color:var(--m);border-right:1px solid var(--line);white-space:pre-wrap;word-break:break-word}
-.caret{display:inline-block;width:7px;height:14px;background:var(--m);vertical-align:-2px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.prev{padding:16px;display:flex;flex-direction:column;gap:10px}
-.prev>div{opacity:0;transform:scale(.92) translateY(8px);transition:.5s cubic-bezier(.2,.9,.3,1.3);border-radius:10px}
+.bar em{margin-left:10px;font-size:12px;color:var(--mute);font-style:normal;font-weight:600;display:flex;align-items:center;gap:5px}
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:300px}
+pre{margin:0;padding:16px;font:12.5px/1.65 ui-monospace,Menlo,Consolas,monospace;color:var(--v);background:color-mix(in srgb,var(--surface-2) 55%,transparent);border-right:1px solid var(--line);white-space:pre-wrap;word-break:break-word}
+.prev{padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.prev>div{opacity:0;transform:scale(.92) translateY(8px);transition:.5s cubic-bezier(.2,.9,.3,1.3);border-radius:12px}
 .prev>div.on{opacity:1;transform:none}
-.pn{height:12px;background:var(--line)}
-.ph{height:60px;background:linear-gradient(135deg,var(--v),var(--m))}
-.pt{height:10px;background:var(--line);width:80%}
-.pg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pg span{height:48px;border-radius:8px;background:var(--line)}
-.pb{height:26px;width:50%;background:var(--a)}
-section{padding:80px 0}
-h2{font-size:clamp(30px,4.5vw,46px);letter-spacing:-.03em;line-height:1.1;margin:0 0 12px}
-.lead{color:var(--mute);max-width:56ch;margin:0 0 36px;font-size:17px}
-.tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:30px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;padding:4px;background:var(--card)}
-.seg button{border:0;background:transparent;color:var(--mute);font:inherit;font-weight:700;padding:8px 18px;border-radius:9px;cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--v);color:#fff}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-.plan{position:relative;padding:30px 26px;border:1px solid var(--line);border-radius:22px;background:var(--card);backdrop-filter:blur(10px);display:flex;flex-direction:column;transition:transform .3s,border-color .3s}
-.plan:hover{transform:translateY(-8px) rotate(-.4deg);border-color:var(--v)}
-.plan.pop{border:2px solid var(--m);background:linear-gradient(180deg,color-mix(in srgb,var(--m) 14%,transparent),var(--card))}
-.tag{position:absolute;top:-13px;right:22px;background:var(--m);color:#06221a;font-weight:800;font-size:12px;padding:4px 12px;border-radius:99px}
-.plan h3{margin:0;font-size:22px}
+.pn{height:14px;background:var(--surface-2);display:flex;align-items:center;padding:0 8px;gap:5px}
+.pn::before,.pn::after{content:"";width:16px;height:5px;border-radius:4px;background:var(--line)}
+.ph{height:68px;background:linear-gradient(135deg,var(--v),var(--m));padding:10px;display:flex;flex-direction:column;justify-content:center;gap:5px;color:#fff}
+.ph span{height:8px;width:65%;border-radius:4px;background:rgba(255,255,255,.85)}
+.ph i{height:6px;width:42%;border-radius:4px;background:rgba(255,255,255,.5);display:block}
+.pt{height:10px;background:var(--surface-2);width:82%}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pg span{height:52px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--v)}
+.pb{height:30px;width:54%;background:linear-gradient(135deg,var(--a),#fb923c);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800}
+
+/* Floating Material Chips */
+.fl{
+  position:absolute;z-index:3;pointer-events:none;
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;border-radius:16px;
+  background:var(--surface);border:1px solid var(--line);
+  box-shadow:var(--elev-2);font-size:12.5px;font-weight:700;color:var(--ink);
+  animation:bob 4.2s ease-in-out infinite;
+}
+.fl .ms{font-size:18px;color:var(--m)}
+.f1{top:-18px;right:16px}
+.f2{bottom:-16px;left:-14px;animation-delay:-1.8s}
+.f2 .ms{color:var(--a)}
+.f3{top:42%;right:-18px;animation-delay:-3s}
+.f3 .ms{color:var(--pink)}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+/* Sections */
+section{padding:76px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--v);background:var(--surface-2);padding:5px 12px;border-radius:99px;margin-bottom:10px}
+h2{font-size:clamp(28px,4.2vw,44px);letter-spacing:-.035em;line-height:1.1;margin:0 0 10px;font-weight:800}
+.lead{color:var(--mute);max-width:56ch;margin:0;font-size:16.5px}
+
+/* Marquee */
+.mq{overflow:hidden;border-block:1px solid var(--line);padding:15px 0;margin:0 0 42px;background:color-mix(in srgb,var(--surface) 55%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq div{display:flex;gap:42px;width:max-content;animation:mq 28s linear infinite}
+.mq span{font-weight:800;font-size:16px;letter-spacing:-.01em;color:var(--mute);white-space:nowrap;display:inline-flex;align-items:center;gap:10px}
+.mq span::before{content:"";width:7px;height:7px;border-radius:2px;transform:rotate(45deg);background:var(--m);display:inline-block}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* Project Carousel with Rich SVG Visuals */
+.slidewrap{position:relative}
+.work{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 24px;scrollbar-width:none}
+.work::-webkit-scrollbar{display:none}
+.wc{
+  flex:0 0 min(325px,85%);scroll-snap-align:start;
+  display:flex;flex-direction:column;gap:13px;padding:18px;
+  border:1px solid var(--line);border-radius:24px;
+  background:var(--surface);color:var(--ink);text-decoration:none;
+  box-shadow:var(--elev-1);
+  transition:transform .3s cubic-bezier(.2,.9,.3,1.2),box-shadow .3s,border-color .3s;
+}
+.wc:hover{transform:translateY(-8px);box-shadow:var(--elev-3);border-color:color-mix(in srgb,var(--v) 45%,transparent)}
+.thumb{
+  height:142px;border-radius:16px;position:relative;overflow:hidden;
+  padding:14px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;
+  background:linear-gradient(135deg,var(--v),var(--m));
+}
+.wc:nth-child(2) .thumb{background:linear-gradient(135deg,#ff7a59,#f59e0b)}
+.wc:nth-child(3) .thumb{background:linear-gradient(135deg,#0284c7,#6366f1)}
+.wc:nth-child(4) .thumb{background:linear-gradient(135deg,#059669,#06b6d4)}
+.wc:nth-child(5) .thumb{background:linear-gradient(135deg,#ec4899,#8b5cf6)}
+.wc:nth-child(6) .thumb{background:linear-gradient(135deg,#10b981,#f43f5e)}
+.wc:nth-child(7) .thumb{background:linear-gradient(135deg,#4f46e5,#0ea5e9)}
+.wc:nth-child(8) .thumb{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.wc:nth-child(9) .thumb{background:linear-gradient(135deg,#1e1b4b,var(--v));border:1.5px dashed rgba(255,255,255,.55)}
+.thumb-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.thumb-badge{background:rgba(255,255,255,.22);backdrop-filter:blur(6px);padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.04em}
+.thumb-ic{width:34px;height:34px;border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center}
+.thumb-svg{position:absolute;inset:auto 0 0 0;width:100%;height:78px;opacity:.95;pointer-events:none}
+.wc h3{margin:0;font-size:18.5px;font-weight:800;letter-spacing:-.02em}
+.wc p{margin:0;color:var(--mute);font-size:14.5px;flex:1}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips i{font-style:normal;font-size:11.5px;font-weight:700;background:var(--surface-2);border-radius:99px;padding:4px 10px;color:var(--mute)}
+.wc u{text-decoration:none;color:var(--v);font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:5px}
+
+.arr{
+  position:absolute;top:40%;z-index:5;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  cursor:pointer;box-shadow:var(--elev-2);display:grid;place-items:center;transition:.2s;
+}
+.arr:hover{background:var(--v);color:#fff;transform:scale(1.08)}
+.arr.l{left:-14px}.arr.r{right:-14px}
+
+/* Service Strip */
+.svc{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:26px}
+.svc div{
+  border:1px solid var(--line);border-radius:20px;padding:18px 10px;
+  text-align:center;background:var(--surface);font-size:13.5px;font-weight:700;
+  box-shadow:var(--elev-1);transition:.25s;
+}
+.svc div:hover{transform:translateY(-5px);box-shadow:var(--elev-2);border-color:var(--v)}
+.svc-ic{width:46px;height:46px;margin:0 auto 10px;border-radius:14px;background:var(--surface-2);color:var(--v);display:grid;place-items:center}
+.svc div:nth-child(2n) .svc-ic{color:var(--m)}
+.svc div:nth-child(3n) .svc-ic{color:var(--a)}
+
+/* Why Me / Material Highlight Grid */
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.perk{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--elev-1);transition:.25s}
+.perk:hover{transform:translateY(-5px);box-shadow:var(--elev-2)}
+.perk-ic{width:46px;height:46px;border-radius:14px;background:var(--surface-2);color:var(--v);display:grid;place-items:center;margin-bottom:14px}
+.perk h3{margin:0 0 6px;font-size:18px}
+.perk p{margin:0;color:var(--mute);font-size:14.5px}
+
+/* Pricing */
+.tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--surface);box-shadow:var(--elev-1)}
+.seg button{border:0;background:transparent;color:var(--mute);font:inherit;font-size:14px;font-weight:700;padding:8px 18px;border-radius:999px;cursor:pointer;transition:.2s}
+.seg button[aria-pressed="true"]{background:var(--v);color:#fff;box-shadow:0 4px 14px -3px color-mix(in srgb,var(--v) 65%,transparent)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.plan{
+  position:relative;padding:30px 26px;border:1px solid var(--line);border-radius:26px;
+  background:var(--surface);box-shadow:var(--elev-1);display:flex;flex-direction:column;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.plan:hover{transform:translateY(-8px);box-shadow:var(--elev-3);border-color:var(--v)}
+.plan.pop{
+  border:2px solid var(--m);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--m) 8%,var(--surface)),var(--surface));
+  box-shadow:var(--elev-2);
+}
+.tag{position:absolute;top:-13px;right:22px;background:linear-gradient(135deg,#059669,var(--m));color:#fff;font-weight:800;font-size:12px;padding:5px 14px;border-radius:99px;box-shadow:0 6px 16px -4px color-mix(in srgb,var(--m) 70%,transparent)}
+.plan h3{margin:0;font-size:22px;font-weight:800}
 .plan .sub{color:var(--mute);font-size:14px;margin:4px 0 18px}
-.price{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1}
-.price small{font-size:14px;color:var(--mute);font-weight:500;letter-spacing:0}
-ul{list-style:none;padding:0;margin:22px 0;display:grid;gap:10px;flex:1}
-li{padding-left:26px;position:relative;font-size:15px}
-li::before{content:"✓";position:absolute;left:0;color:var(--m);font-weight:800}
-.plan .btn{text-align:center}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.box{border:1px solid var(--line);border-radius:20px;padding:26px;background:var(--card)}
-.box h3{margin:0 0 6px}
-.line{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.price{font-size:42px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.price small{font-size:14px;color:var(--mute);font-weight:600;letter-spacing:0}
+ul{list-style:none;padding:0;margin:22px 0;display:grid;gap:11px;flex:1}
+li{padding-left:28px;position:relative;font-size:14.5px}
+li::before{content:"check_circle";font-family:"Material Symbols Rounded";position:absolute;left:0;top:1px;color:var(--m);font-size:19px}
+
+/* Addons & Estimator */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.box{border:1px solid var(--line);border-radius:24px;padding:26px;background:var(--surface);box-shadow:var(--elev-1)}
+.box h3{margin:0 0 6px;font-size:20px;display:flex;align-items:center;gap:8px}
+.line{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:15px}
 .line:last-child{border:0}
 .line b{white-space:nowrap}
-.care{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-.care div{border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
-.care b{display:block;font-size:20px}.care span{font-size:13px;color:var(--mute)}
-.est{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}
-.opt{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:9px;cursor:pointer;transition:.2s}
-.opt:hover{border-color:var(--v)}
-.opt:has(input:checked){border-color:var(--m);background:color-mix(in srgb,var(--m) 12%,transparent)}
+.care{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.care div{border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;background:var(--surface-2)}
+.care b{display:block;font-size:20px;color:var(--v)}.care span{font-size:12.5px;color:var(--mute)}
+
+.est{display:grid;grid-template-columns:1.25fr 1fr;gap:22px}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 15px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;cursor:pointer;background:var(--surface);transition:.2s}
+.opt:hover{border-color:var(--v);transform:translateX(3px)}
+.opt:has(input:checked){border-color:var(--m);background:color-mix(in srgb,var(--m) 10%,var(--surface))}
 .opt input{accent-color:var(--m);width:18px;height:18px}
-.opt span{margin-left:auto;color:var(--mute);font-size:14px}
-.total{display:flex;flex-direction:column;justify-content:center;text-align:center;background:linear-gradient(145deg,var(--v),#a45cff);color:#fff;border-radius:20px;padding:30px}
-.total b{font-size:clamp(36px,5vw,54px);letter-spacing:-.03em;display:block;line-height:1.1}
+.opt span{margin-left:auto;color:var(--mute);font-size:14px;font-weight:700}
+.total{
+  display:flex;flex-direction:column;justify-content:center;text-align:center;
+  background:linear-gradient(145deg,var(--v),#7c3aed,var(--pink));
+  color:#fff;border-radius:26px;padding:34px;box-shadow:var(--elev-3);
+}
+.total b{font-size:clamp(36px,5vw,56px);letter-spacing:-.03em;display:block;line-height:1.1;margin:8px 0}
+
+/* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
-.step{border-top:3px solid var(--v);padding-top:16px;counter-increment:s}
-.step::before{content:"Step " counter(s);color:var(--m);font-weight:700;font-size:14px}
-.step h3{margin:4px 0}.step p{color:var(--mute);margin:0;font-size:15px}
-details{border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px;background:var(--card)}
-summary{cursor:pointer;font-weight:700}
-details p{color:var(--mute);margin:10px 0 0}
-form{display:grid;gap:12px}
-input[type=text],input[type=email],select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
-textarea{min-height:110px;resize:vertical}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);text-align:center;font-size:14px}
-.mq{overflow:hidden;border-block:1px solid var(--line);padding:16px 0;margin:0 0 56px;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}.mq div{display:flex;gap:46px;width:max-content;animation:mq 28s linear infinite}.mq span{font-weight:800;font-size:19px;letter-spacing:-.01em;color:var(--mute);white-space:nowrap}.mq span::before{content:"◆";color:var(--m);margin-right:46px;font-size:10px;vertical-align:2px}@keyframes mq{to{transform:translateX(-50%)}}.work{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 22px;scrollbar-width:none}.work::-webkit-scrollbar{display:none}.work .rv{opacity:1;transform:none}.wc{display:flex;flex-direction:column;gap:12px;padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--card);backdrop-filter:blur(10px);color:var(--ink);text-decoration:none;transition:transform .3s,border-color .3s}.wc:hover{transform:translateY(-6px);border-color:var(--m)}.wc{flex:0 0 min(310px,82%);scroll-snap-align:start}.wc:nth-child(6) .mono{background:linear-gradient(135deg,#2ee6a6,#ff4d8d)}.wc:nth-child(7) .mono{background:linear-gradient(135deg,#6c5cff,#1fb6ff)}.wc:nth-child(8) .mono{background:linear-gradient(135deg,#ffb547,#ff4d8d)}.wc:nth-child(9) .mono{background:linear-gradient(135deg,#14163d,var(--v));border:1px dashed var(--m)}.wc:nth-child(1){--ic:"📊"}.wc:nth-child(2){--ic:"🏛️"}.wc:nth-child(3){--ic:"🎓"}.wc:nth-child(4){--ic:"🏃"}.wc:nth-child(5){--ic:"💃"}.wc:nth-child(6){--ic:"🌸"}.wc:nth-child(7){--ic:"👥"}.wc:nth-child(8){--ic:"📄"}.wc:nth-child(9){--ic:"✨"}.mono{position:relative;isolation:isolate;overflow:hidden}.mono::after{content:"";position:absolute;inset:auto 0 0;height:60%;z-index:-1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 60' preserveAspectRatio='none'%3E%3Cpath fill='white' fill-opacity='.22' d='M0 60V38l40-28 35 24 45-30 50 38 40-22 50 26 40-18v32z'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}.mono::before{content:var(--ic);position:absolute;right:12px;top:6px;font-size:26px;animation:bob 3s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-6px)}}.slidewrap{position:relative}.arr{position:absolute;top:38%;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:24px;cursor:pointer;box-shadow:0 8px 24px -8px #000}.arr.l{left:-12px}.arr.r{right:-12px}.svc{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:30px}.svc div{border:1px solid var(--line);border-radius:16px;padding:16px 8px;text-align:center;background:var(--card);font-size:14px;font-weight:700}.svc b{display:block;font-size:30px;animation:bob 3s ease-in-out infinite}.svc div:nth-child(2n) b{animation-delay:-1s}.svc div:nth-child(3n) b{animation-delay:-2s}.hero{position:relative}.hero h1{min-height:3.1em}.fl{position:absolute;font-size:30px;z-index:2;pointer-events:none;animation:bob 4s ease-in-out infinite}.f1{top:2%;left:44%}.f2{bottom:0;left:2%;animation-delay:-1.5s}.f3{top:6%;right:0;animation-delay:-3s}#prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:0;background:linear-gradient(90deg,var(--m),var(--v),var(--a));z-index:70}.btn{position:relative;overflow:hidden}.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);transform:translateX(-120%);animation:sh 3.5s infinite}@keyframes sh{to{transform:translateX(120%)}}.payrow{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}#amt{flex:1 1 140px;font:inherit;font-size:20px;font-weight:800;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}@media (max-width:900px){.svc{grid-template-columns:repeat(3,1fr)}.arr{display:none}}.mono{height:92px;border-radius:14px;display:grid;place-items:center;font-size:34px;font-weight:800;letter-spacing:-.03em;color:#fff;background:linear-gradient(135deg,var(--v),var(--m))}.wc:nth-child(2) .mono{background:linear-gradient(135deg,#ff7a59,var(--a))}.wc:nth-child(3) .mono{background:linear-gradient(135deg,#1fb6ff,var(--v))}.wc:nth-child(4) .mono{background:linear-gradient(135deg,var(--m),#1fb6ff)}.wc:nth-child(5) .mono{background:linear-gradient(135deg,#ff4d8d,var(--v))}.wc h3{margin:0;font-size:19px}.wc p{margin:0;color:var(--mute);font-size:15px;flex:1}.chips{display:flex;gap:6px;flex-wrap:wrap}.chips i{font-style:normal;font-size:12px;font-weight:700;border:1px solid var(--line);border-radius:99px;padding:2px 10px;color:var(--mute)}.wc u{text-decoration:none;color:var(--m);font-weight:700;font-size:14px}
-.rv{opacity:0;transform:translateY(26px);transition:.7s}.rv.in{opacity:1;transform:none}
-@media (max-width:900px){.work{grid-template-columns:1fr 1fr}.hero,.two,.est{grid-template-columns:1fr}.plans{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}nav a.h{display:none}}
-@media (max-width:520px){.work{grid-template-columns:1fr}.split{grid-template-columns:1fr}pre{border-right:0;border-bottom:1px solid var(--line)}.steps,.care{grid-template-columns:1fr}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--elev-1);counter-increment:s;position:relative;overflow:hidden;transition:.25s}
+.step:hover{transform:translateY(-5px);box-shadow:var(--elev-2);border-color:var(--v)}
+.step::before{content:"0" counter(s);display:inline-block;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--v);font-weight:800;font-size:12px;margin-bottom:10px}
+.step h3{margin:0 0 6px;font-size:19px}.step p{color:var(--mute);margin:0;font-size:14.5px}
+
+/* FAQ */
+details{border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin-bottom:12px;background:var(--surface);box-shadow:var(--elev-1);transition:.2s}
+details[open]{border-color:var(--v);box-shadow:var(--elev-2)}
+summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"expand_more";font-family:"Material Symbols Rounded";font-size:22px;color:var(--v);transition:.25s}
+details[open] summary::after{transform:rotate(180deg)}
+details p{color:var(--mute);margin:12px 0 0;font-size:15px}
+
+/* Payment - Clean Link Only */
+.pay-card{
+  display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  background:linear-gradient(135deg,var(--surface),var(--surface-2));
+  border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:var(--elev-2);
+}
+.pay-brand{display:flex;align-items:center;gap:16px}
+.pay-ic{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,#072654,#2563eb);color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px -6px rgba(37,99,235,.5)}
+.pay-brand h3{margin:0 0 4px;font-size:21px}
+.pay-brand p{margin:0;color:var(--mute);font-size:14.5px}
+
+/* Contact - WhatsApp & Gmail Cards (No Form) */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.c-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:28px;
+  box-shadow:var(--elev-2);display:flex;flex-direction:column;gap:16px;
+  transition:transform .28s,box-shadow .28s,border-color .28s;
+}
+.c-card:hover{transform:translateY(-6px);box-shadow:var(--elev-3)}
+.c-card.wa:hover{border-color:#16a34a}
+.c-card.gm:hover{border-color:#ea4335}
+.c-head{display:flex;align-items:center;gap:14px}
+.c-ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;flex-shrink:0}
+.c-card.wa .c-ic{background:#dcfce7;color:#16a34a}
+.c-card.gm .c-ic{background:#fee2e2;color:#ea4335}
+.c-head span{display:block;font-size:13px;font-weight:700;color:var(--mute)}
+.c-head b{font-size:20px;letter-spacing:-.02em;word-break:break-all}
+.c-card p{margin:0;color:var(--mute);font-size:14.5px}
+.c-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+
+/* Floating WhatsApp FAB */
+.fab{
+  position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:13px 18px;border-radius:999px;
+  background:#16a34a;color:#fff;text-decoration:none;font-weight:700;font-size:14px;
+  box-shadow:0 14px 32px -6px rgba(22,163,74,.55);
+  transition:transform .22s,box-shadow .22s;
+}
+.fab:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 20px 38px -6px rgba(22,163,74,.65)}
+
+/* Toast */
+#toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:999px;
+  font-size:14px;font-weight:700;z-index:90;box-shadow:var(--elev-3);transition:.25s;
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--mute);text-align:center;font-size:14px;background:color-mix(in srgb,var(--surface) 55%,transparent)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:960px){
+  .hero,.two,.est,.contact-grid{grid-template-columns:1fr}
+  .plans,.perks{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .svc{grid-template-columns:repeat(3,1fr)}
+  nav a.h{display:none}
+  .arr{display:none}
+  .studio{transform:none}
+}
+@media (max-width:560px){
+  .stats{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  pre{border-right:0;border-bottom:1px solid var(--line)}
+  .steps,.care,.svc{grid-template-columns:1fr}
+  .fl{display:none}
+  .fab span{display:none}
+  .fab{padding:14px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<div id="prog"></div><div class="glow" id="glow"></div><div class="orb o1"></div><div class="orb o2"></div>
-<nav><div class="wrap">
-<div class="logo">pritz<b>.dev</b></div>
-<a class="h" href="#work">Work</a><a class="h" href="#pricing">Pricing</a><a class="h" href="#estimate">Estimator</a><a class="h" href="#process">Process</a><a class="h" href="#faq">FAQ</a><a class="h" href="#pay">Pay</a>
-<button class="icon" id="theme" aria-label="Toggle light and dark theme">◐</button>
-<a class="btn" href="#contact" style="color:#fff;padding:9px 18px">Hire me</a>
-</div></nav>
+<div id="prog"></div>
+<div class="glow" id="glow"></div>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">
+      <span class="logo-mark"><span class="ms">code</span></span>
+      <span>pritz<b>.dev</b></span>
+    </a>
+    <a class="h" href="#work">Work</a>
+    <a class="h" href="#pricing">Pricing</a>
+    <a class="h" href="#estimate">Estimator</a>
+    <a class="h" href="#process">Process</a>
+    <a class="h" href="#faq">FAQ</a>
+    <a class="h" href="#pay">Pay</a>
+    <button class="icon" id="theme" aria-label="Toggle light and dark theme" title="Switch theme">
+      <span class="ms" id="themeIcon">dark_mode</span>
+    </button>
+    <a class="btn" href="#contact" style="padding:9px 18px;font-size:14px">
+      <span class="ms" style="font-size:18px">chat</span> Hire me
+    </a>
+  </div>
+</nav>
+
 <main>
-<header class="wrap hero">
-<div>
-<h1>Websites that <span class="grad" id="tw"></span><span class="caret" style="height:.8em;width:.08em;margin-left:4px;vertical-align:-.05em"></span></h1>
-<p>I design and build fast, mobile-first websites and web apps for businesses, startups and institutions. Clear pricing, fixed deadlines, no surprises.</p>
-<div class="row"><a class="btn" href="#pricing">See pricing</a><a class="btn ghost" href="#estimate">Estimate my project</a></div>
-<div class="stats"><div><b data-n="40">0</b><span>projects shipped</span></div><div><b data-n="5">0</b><span>days to first draft</span></div><div><b data-n="100">0</b><span>% mobile-ready</span></div></div>
-</div>
-<span class="fl f1" aria-hidden="true">⚡</span><span class="fl f2" aria-hidden="true">🎨</span><span class="fl f3" aria-hidden="true">🚀</span>
-<div class="studio" aria-hidden="true">
-<div class="bar"><i></i><i></i><i></i><em>live build — yourbrand.com</em></div>
-<div class="split"><pre id="code"></pre>
-<div class="prev"><div class="pn" id="p1"></div><div class="ph" id="p2"></div><div class="pt" id="p3"></div><div class="pg" id="p4"><span></span><span></span></div><div class="pb" id="p5"></div></div></div>
-</div>
-</header>
+  <header class="wrap hero">
+    <div>
+      <div class="badge-pill"><span class="pulse-dot"></span> Available for new projects</div>
+      <h1>Websites that <span class="grad" id="tw"></span><span class="caret"></span></h1>
+      <p>I design and build fast, mobile-first websites and web apps for businesses, startups and institutions. Clear pricing, fixed deadlines, no surprises.</p>
+      <div class="row">
+        <a class="btn" href="#pricing"><span class="ms">sell</span> See pricing</a>
+        <a class="btn ghost" href="#estimate"><span class="ms">calculate</span> Estimate my project</a>
+      </div>
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-ic"><span class="ms">rocket_launch</span></div>
+          <div><b data-n="40">0</b><span>Projects shipped</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ic"><span class="ms">bolt</span></div>
+          <div><b data-n="5">0</b><span>Days to 1st draft</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-ic"><span class="ms">devices</span></div>
+          <div><b data-n="100">0</b><span>% Mobile-ready</span></div>
+        </div>
+      </div>
+    </div>
 
-<section id="work"><div class="wrap">
-<h2 class="rv">Live sites I’ve built.</h2>
-<p class="lead rv">Real platforms used by government departments, institutes and businesses. Open any of them.</p>
-<div class="mq" aria-label="Organisations I have worked with"><div><span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR</span><span>Mim Dance Academy</span><span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR</span><span>Mim Dance Academy</span></div></div>
-<div class="slidewrap"><button class="arr l" id="prev" aria-label="Previous project">‹</button><button class="arr r" id="next" aria-label="Next project">›</button><div class="work" id="work">
-<a class="wc rv" href="https://mis.sicbsikkim.org/" target="_blank" rel="noopener"><div class="mono">MIS</div><h3>SICB MIS</h3><p>A management information system for the Skill Development Department, Government of Sikkim.</p><div class="chips"><i>Web platform</i><i>Government</i><i>Dashboards</i></div><u>Visit site ↗</u></a>
-<a class="wc rv" href="https://sicbsikkim.org/" target="_blank" rel="noopener"><div class="mono">SICB</div><h3>SICB Sikkim</h3><p>The public website of the Sikkim Institute of Capacity Building.</p><div class="chips"><i>Public site</i><i>Government</i></div><u>Visit site ↗</u></a>
-<a class="wc rv" href="https://sikkimniyuktikendra.org/" target="_blank" rel="noopener"><div class="mono">SNK</div><h3>Sikkim Niyukti Kendra</h3><p>Youth skilling and job placement portal with online registration and a live progress counter.</p><div class="chips"><i>Portal</i><i>Registrations</i><i>Live stats</i></div><u>Visit site ↗</u></a>
-<a class="wc rv" href="https://sikkimniyuktikendra.org/run/" target="_blank" rel="noopener"><div class="mono">5K</div><h3>FunRun 5K Marathon</h3><p>Golden Jubilee event site for Govt. ITI Rangpo with a countdown, route guide and secure online payment.</p><div class="chips"><i>Event site</i><i>Payments</i><i>Countdown</i></div><u>Visit site ↗</u></a>
-<a class="wc rv" href="https://mimdanceacademy.com/" target="_blank" rel="noopener"><div class="mono">MIM</div><h3>Mim Dance Academy</h3><p>A website for a dance academy, built to showcase classes and bring in new students.</p><div class="chips"><i>Business site</i><i>Responsive</i></div><u>Visit site ↗</u></a>
-<a class="wc" href="http://nrco.icar.gov.in/" target="_blank" rel="noopener"><div class="mono">ICAR</div><h3>ICAR – NRCO</h3><p>Website of the National Research Centre for Orchids at Pakyong, Sikkim, a research centre set up in 1996.</p><div class="chips"><i>Research institute</i><i>Government</i></div><u>Visit site ↗</u></a>
-<div class="wc"><div class="mono">EMS</div><h3>Employee Management System</h3><p>An admin-only system for managing staff records and department data.</p><div class="chips"><i>Internal</i><i>PHP/MySQL</i></div><u>Private system</u></div>
-<div class="wc"><div class="mono">DSDP</div><h3>District Skill Plans</h3><p>Word documents for District Skill Development Plans, generated automatically from data.</p><div class="chips"><i>Automation</i><i>DOCX</i></div><u>Internal tool</u></div>
-<a class="wc" href="#contact"><div class="mono">You</div><h3>Your project is next</h3><p>Tell me what you need and I’ll send a fixed quote within 24 hours.</p><div class="chips"><i>Free call</i><i>Fixed price</i></div><u>Start a project ↓</u></a>
-</div></div>
-<div class="svc rv"><div><b>🚀</b>Landing pages</div><div><b>🏛️</b>Govt portals</div><div><b>🛒</b>Online stores</div><div><b>💳</b>Payments</div><div><b>📊</b>Dashboards</div><div><b>📱</b>Mobile-first</div></div>
-</div></section>
+    <div class="hero-visual">
+      <div class="fl f1" aria-hidden="true"><span class="ms">speed</span> 99 Lighthouse</div>
+      <div class="fl f2" aria-hidden="true"><span class="ms">palette</span> Material UI</div>
+      <div class="fl f3" aria-hidden="true"><span class="ms">verified</span> Govt &amp; Startup Tested</div>
+      <div class="studio" aria-hidden="true">
+        <div class="bar"><i></i><i></i><i></i><em><span class="ms" style="font-size:15px;color:var(--m)">lock</span> live build — yourbrand.com</em></div>
+        <div class="split">
+          <pre id="code"></pre>
+          <div class="prev">
+            <div class="pn" id="p1"></div>
+            <div class="ph" id="p2"><span></span><i></i></div>
+            <div class="pt" id="p3"></div>
+            <div class="pg" id="p4">
+              <span><span class="ms">analytics</span></span>
+              <span><span class="ms">payments</span></span>
+            </div>
+            <div class="pb" id="p5">LAUNCHING →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<section id="pricing"><div class="wrap">
-<h2 class="rv">Pick a plan. Know the cost upfront.</h2>
-<p class="lead rv">One-time project prices. Hosting, domain and third-party fees are separate unless stated.</p>
-<div class="tools rv"><div class="seg" role="group" aria-label="Currency"><button data-cur="INR" aria-pressed="true">₹ INR</button><button data-cur="USD" aria-pressed="false">$ USD</button></div></div>
-<div class="plans">
-<article class="plan rv"><h3>Launch</h3><div class="sub">A sharp one-page site to get online fast.</div><div class="price"><span data-inr="9999">9,999</span></div>
-<ul><li>1 landing page, fully responsive</li><li>Contact form and WhatsApp button</li><li>Basic SEO and speed tuning</li><li>2 rounds of revisions</li><li>Delivered in 5 days</li></ul><a class="btn ghost" href="#contact" data-plan="Launch">Start with Launch</a></article>
-<article class="plan pop rv"><span class="tag">Most chosen</span><h3>Business</h3><div class="sub">A complete multi-page site that builds trust.</div><div class="price"><span data-inr="24999">24,999</span></div>
-<ul><li>Up to 6 custom-designed pages</li><li>Animations and interactive sections</li><li>Blog or CMS-ready structure</li><li>SEO, analytics and Google Maps</li><li>3 rounds of revisions</li><li>Delivered in 14 days</li></ul><a class="btn" href="#contact" data-plan="Business">Choose Business</a></article>
-<article class="plan rv"><h3>Platform</h3><div class="sub">Custom web apps, portals and dashboards.</div><div class="price"><span data-inr="59999">59,999</span><small> and up</small></div>
-<ul><li>Login, roles and admin panel</li><li>Database design (PHP/MySQL or Node)</li><li>Online payments and reports</li><li>Security hardening and backups</li><li>Training and documentation</li><li>Delivered in 30 days or less</li></ul><a class="btn ghost" href="#contact" data-plan="Platform">Discuss Platform</a></article>
-</div></div></section>
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <span class="eyebrow"><span class="ms" style="font-size:15px">deployed_code</span> Portfolio</span>
+          <h2>Live sites I’ve built.</h2>
+          <p class="lead">Real platforms used by government departments, institutes and businesses. Open any of them.</p>
+        </div>
+      </div>
 
-<section><div class="wrap two">
-<div class="box rv"><h3>Add-ons</h3><div class="sub" style="color:var(--mute);margin-bottom:8px">Mix into any plan.</div>
-<div class="line"><span>Payment gateway integration</span><b data-inr="7500"></b></div>
-<div class="line"><span>Extra page</span><b data-inr="2500"></b></div>
-<div class="line"><span>Logo and brand kit</span><b data-inr="4000"></b></div>
-<div class="line"><span>Domain and hosting setup</span><b data-inr="2000"></b></div>
-<div class="line"><span>Content writing, per page</span><b data-inr="1500"></b></div>
-<div class="line"><span>Hourly work, anything else</span><b><span data-inr="800"></span>/hr</b></div></div>
-<div class="box rv"><h3>Monthly care plans</h3><div class="sub" style="color:var(--mute)">Updates, backups, uptime checks and fixes after launch.</div>
-<div class="care"><div><b data-inr="999"></b><span>Basic<br>2 edits a month</span></div><div><b data-inr="2499"></b><span>Growth<br>8 edits and reports</span></div><div><b data-inr="4999"></b><span>Priority<br>Same-day fixes</span></div></div>
-<div class="line" style="margin-top:14px"><span>Payment terms</span><b>50% to start, 50% on delivery</b></div></div>
-</div></section>
+      <div class="mq" aria-label="Organisations I have worked with">
+        <div>
+          <span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR – NRCO</span><span>Mim Dance Academy</span>
+          <span>Government of Sikkim</span><span>Skill Development Department</span><span>SICB Sikkim</span><span>Govt. ITI Rangpo</span><span>ICAR – NRCO</span><span>Mim Dance Academy</span>
+        </div>
+      </div>
 
-<section id="estimate"><div class="wrap">
-<h2 class="rv">Build your own estimate.</h2>
-<p class="lead rv">Choose a base plan and add-ons. The total updates instantly.</p>
-<div class="est">
-<div class="box rv"><div class="seg" id="base" role="group" aria-label="Base plan" style="margin-bottom:16px"><button data-v="9999" aria-pressed="false">Launch</button><button data-v="24999" aria-pressed="true">Business</button><button data-v="59999" aria-pressed="false">Platform</button></div>
-<label class="opt"><input type="checkbox" data-v="7500">Payment gateway<span data-inr="7500"></span></label>
-<label class="opt"><input type="checkbox" data-v="2500">One extra page<span data-inr="2500"></span></label>
-<label class="opt"><input type="checkbox" data-v="4000">Logo and brand kit<span data-inr="4000"></span></label>
-<label class="opt"><input type="checkbox" data-v="2000">Domain and hosting setup<span data-inr="2000"></span></label>
-<label class="opt"><input type="checkbox" data-v="4500">Care plan, first 3 months of Growth<span data-inr="4500"></span></label></div>
-<div class="total rv"><span>Estimated total</span><b id="sum">0</b><span style="opacity:.85;font-size:14px;margin:6px 0 18px">Final quote confirmed after a free 20-minute call.</span><a class="btn" style="background:#fff;color:#2b1a8f;box-shadow:none" href="#contact">Get this quote</a></div>
-</div></div></section>
+      <div class="slidewrap">
+        <button class="arr l" id="prev" aria-label="Previous project"><span class="ms">chevron_left</span></button>
+        <button class="arr r" id="next" aria-label="Next project"><span class="ms">chevron_right</span></button>
+        <div class="work" id="workTrack">
+          <a class="wc rv" href="https://mis.sicbsikkim.org/" target="_blank" rel="noopener">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">MIS PORTAL</span><span class="thumb-ic"><span class="ms">monitoring</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><rect x="18" y="36" width="32" height="44" rx="6" fill="rgba(255,255,255,.3)"/><rect x="62" y="20" width="32" height="60" rx="6" fill="rgba(255,255,255,.45)"/><rect x="106" y="42" width="32" height="38" rx="6" fill="rgba(255,255,255,.35)"/><rect x="150" y="10" width="32" height="70" rx="6" fill="rgba(255,255,255,.65)"/><path d="M196 58 Q230 16 285 28" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <h3>SICB MIS</h3>
+            <p>A management information system for the Skill Development Department, Government of Sikkim.</p>
+            <div class="chips"><i>Web platform</i><i>Government</i><i>Dashboards</i></div>
+            <u>Visit site <span class="ms" style="font-size:17px">arrow_outward</span></u>
+          </a>
 
-<section id="process"><div class="wrap">
-<h2 class="rv">From idea to live in four steps.</h2><p class="lead rv">You see progress every few days, never a black box.</p>
-<div class="steps">
-<div class="step rv"><h3>Discover</h3><p>A short call to agree on goals, pages and budget.</p></div>
-<div class="step rv"><h3>Design</h3><p>You review a clickable design before any code is written.</p></div>
-<div class="step rv"><h3>Build</h3><p>I code it, test on real phones, and share a live preview link.</p></div>
-<div class="step rv"><h3>Launch</h3><p>Go live, hand over everything, and get 30 days of free bug fixes.</p></div>
-</div></div></section>
+          <a class="wc rv" href="https://sicbsikkim.org/" target="_blank" rel="noopener">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">INSTITUTE</span><span class="thumb-ic"><span class="ms">account_balance</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 80V48l50-24 50 20 55-32 55 28 50-18 40 20v38z" fill="rgba(255,255,255,.26)"/><circle cx="242" cy="24" r="14" fill="rgba(255,255,255,.35)"/></svg>
+            </div>
+            <h3>SICB Sikkim</h3>
+            <p>The public website of the Sikkim Institute of Capacity Building.</p>
+            <div class="chips"><i>Public site</i><i>Government</i></div>
+            <u>Visit site <span class="ms" style="font-size:17px">arrow_outward</span></u>
+          </a>
 
-<section id="faq"><div class="wrap" style="max-width:780px">
-<h2 class="rv">Questions, answered.</h2><br>
-<details class="rv"><summary>Is hosting included?</summary><p>Setup is included. Hosting and domain are billed by the provider, usually ₹1,500 to ₹5,000 a year for small sites.</p></details>
-<details class="rv"><summary>Can I change the design after approval?</summary><p>Yes, within your plan’s revision rounds. Bigger changes are quoted at the hourly rate.</p></details>
-<details class="rv"><summary>Do I own the code?</summary><p>Yes. After final payment, the code, design files and content are fully yours.</p></details>
-<details class="rv"><summary>What if my project doesn’t fit a plan?</summary><p>Most don’t fit perfectly. Send the details and I’ll give a fixed quote within 24 hours.</p></details>
-</div></section>
+          <a class="wc rv" href="https://sikkimniyuktikendra.org/" target="_blank" rel="noopener">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">JOB PORTAL</span><span class="thumb-ic"><span class="ms">school</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><rect x="16" y="20" width="120" height="50" rx="10" fill="rgba(255,255,255,.28)"/><rect x="148" y="28" width="136" height="42" rx="10" fill="rgba(255,255,255,.2)"/><circle cx="44" cy="45" r="12" fill="rgba(255,255,255,.55)"/></svg>
+            </div>
+            <h3>Sikkim Niyukti Kendra</h3>
+            <p>Youth skilling and job placement portal with online registration and a live progress counter.</p>
+            <div class="chips"><i>Portal</i><i>Registrations</i><i>Live stats</i></div>
+            <u>Visit site <span class="ms" style="font-size:17px">arrow_outward</span></u>
+          </a>
 
-<section id="pay"><div class="wrap" style="max-width:780px"><h2 class="rv">Pay securely. 💳</h2><p class="lead rv">Already agreed on a quote? Tap the button, enter the amount and pay by UPI, card or net banking.</p>
-<div class="box rv"><div class="payrow"><input type="number" id="amt" min="1" value="12500" aria-label="Amount in rupees" style="display:none"><a class="btn" id="upi" href="#pay" style="display:none">Pay with UPI</a><a class="btn" id="plink" href="#pay" target="_blank" rel="noopener">Pay now with Razorpay</a></div>
-<div class="line" style="display:none"><span>UPI ID</span><b id="uid"></b><button class="icon" id="cp" aria-label="Copy UPI ID">⧉</button></div>
-<div class="line"><span>After paying</span><b>Send me the receipt</b></div></div></div></section>
+          <a class="wc rv" href="https://sikkimniyuktikendra.org/run/" target="_blank" rel="noopener">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">EVENT + PAY</span><span class="thumb-ic"><span class="ms">directions_run</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 64 C60 22, 120 74, 190 28 S260 54, 300 18" stroke="rgba(255,255,255,.6)" stroke-width="5" fill="none" stroke-dasharray="10 8"/></svg>
+            </div>
+            <h3>FunRun 5K Marathon</h3>
+            <p>Golden Jubilee event site for Govt. ITI Rangpo with a countdown, route guide and secure online payment.</p>
+            <div class="chips"><i>Event site</i><i>Payments</i><i>Countdown</i></div>
+            <u>Visit site <span class="ms" style="font-size:17px">arrow_outward</span></u>
+          </a>
 
-<section id="contact"><div class="wrap" style="max-width:640px">
-<h2 class="rv">Let’s build yours.</h2><p class="lead rv">Tell me what you need. You’ll hear back within 24 hours.</p>
-<form id="f" class="rv">
-<input type="text" id="n" placeholder="Your name" required aria-label="Your name">
-<input type="email" id="e" placeholder="Email address" required aria-label="Email address">
-<select id="p" aria-label="Plan"><option>Launch</option><option selected>Business</option><option>Platform</option><option>Not sure yet</option></select>
-<textarea id="m" placeholder="What are you building, and when do you need it?" required aria-label="Project details"></textarea>
-<button class="btn" type="submit">Send project details</button>
-<small id="ok" style="color:var(--m)" role="status"></small>
-</form></div></section>
+          <a class="wc rv" href="https://mimdanceacademy.com/" target="_blank" rel="noopener">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">CREATIVE</span><span class="thumb-ic"><span class="ms">music_note</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><circle cx="70" cy="60" r="38" fill="rgba(255,255,255,.22)"/><circle cx="160" cy="52" r="28" fill="rgba(255,255,255,.32)"/><circle cx="245" cy="62" r="34" fill="rgba(255,255,255,.2)"/></svg>
+            </div>
+            <h3>Mim Dance Academy</h3>
+            <p>A website for a dance academy, built to showcase classes and bring in new students.</p>
+            <div class="chips"><i>Business site</i><i>Responsive</i></div>
+            <u>Visit site <span class="ms" style="font-size:17px">arrow_outward</span></u>
+          </a>
+
+          <a class="wc" href="http://nrco.icar.gov.in/" target="_blank" rel="noopener">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">RESEARCH</span><span class="thumb-ic"><span class="ms">local_florist</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 80 Q75 20 150 56 T300 28 V80 Z" fill="rgba(255,255,255,.28)"/></svg>
+            </div>
+            <h3>ICAR – NRCO</h3>
+            <p>Website of the National Research Centre for Orchids at Pakyong, Sikkim, a research centre set up in 1996.</p>
+            <div class="chips"><i>Research institute</i><i>Government</i></div>
+            <u>Visit site <span class="ms" style="font-size:17px">arrow_outward</span></u>
+          </a>
+
+          <div class="wc">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">INTERNAL</span><span class="thumb-ic"><span class="ms">badge</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><rect x="20" y="24" width="260" height="14" rx="7" fill="rgba(255,255,255,.3)"/><rect x="20" y="48" width="180" height="14" rx="7" fill="rgba(255,255,255,.2)"/></svg>
+            </div>
+            <h3>Employee Management System</h3>
+            <p>An admin-only system for managing staff records and department data.</p>
+            <div class="chips"><i>Internal</i><i>PHP/MySQL</i></div>
+            <u><span class="ms" style="font-size:16px">lock</span> Private system</u>
+          </div>
+
+          <div class="wc">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">AUTOMATION</span><span class="thumb-ic"><span class="ms">description</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><rect x="30" y="18" width="80" height="54" rx="8" fill="rgba(255,255,255,.28)"/><rect x="122" y="18" width="80" height="54" rx="8" fill="rgba(255,255,255,.38)"/><rect x="214" y="18" width="60" height="54" rx="8" fill="rgba(255,255,255,.22)"/></svg>
+            </div>
+            <h3>District Skill Plans</h3>
+            <p>Word documents for District Skill Development Plans, generated automatically from data.</p>
+            <div class="chips"><i>Automation</i><i>DOCX</i></div>
+            <u><span class="ms" style="font-size:16px">auto_awesome</span> Internal tool</u>
+          </div>
+
+          <a class="wc" href="#contact">
+            <div class="thumb">
+              <div class="thumb-top"><span class="thumb-badge">YOUR TURN</span><span class="thumb-ic"><span class="ms">add_circle</span></span></div>
+              <svg class="thumb-svg" viewBox="0 0 300 80" preserveAspectRatio="none"><circle cx="150" cy="48" r="24" fill="rgba(255,255,255,.25)"/></svg>
+            </div>
+            <h3>Your project is next</h3>
+            <p>Tell me what you need and I’ll send a fixed quote within 24 hours.</p>
+            <div class="chips"><i>Free call</i><i>Fixed price</i></div>
+            <u>Start a project <span class="ms" style="font-size:17px">arrow_downward</span></u>
+          </a>
+        </div>
+      </div>
+
+      <div class="svc rv">
+        <div><div class="svc-ic"><span class="ms">rocket_launch</span></div>Landing pages</div>
+        <div><div class="svc-ic"><span class="ms">account_balance</span></div>Govt portals</div>
+        <div><div class="svc-ic"><span class="ms">storefront</span></div>Online stores</div>
+        <div><div class="svc-ic"><span class="ms">credit_card</span></div>Payments</div>
+        <div><div class="svc-ic"><span class="ms">bar_chart</span></div>Dashboards</div>
+        <div><div class="svc-ic"><span class="ms">smartphone</span></div>Mobile-first</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="perks">
+        <div class="perk rv">
+          <div class="perk-ic"><span class="ms">speed</span></div>
+          <h3>Built for raw speed</h3>
+          <p>Clean, hand-crafted code without bloated page builders—so pages load fast even on slow mobile networks.</p>
+        </div>
+        <div class="perk rv">
+          <div class="perk-ic" style="color:var(--m)"><span class="ms">verified_user</span></div>
+          <h3>Transparent fixed pricing</h3>
+          <p>You know the total cost and timeline before we start. Zero hidden charges or surprise retainers.</p>
+        </div>
+        <div class="perk rv">
+          <div class="perk-ic" style="color:var(--a)"><span class="ms">support_agent</span></div>
+          <h3>Direct communication</h3>
+          <p>Work directly with the developer building your site via WhatsApp or email—no middlemen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <span class="eyebrow"><span class="ms" style="font-size:15px">payments</span> Pricing</span>
+          <h2>Pick a plan. Know the cost upfront.</h2>
+          <p class="lead">One-time project prices. Hosting, domain and third-party fees are separate unless stated.</p>
+        </div>
+        <div class="tools" style="margin:0">
+          <div class="seg" role="group" aria-label="Currency">
+            <button data-cur="INR" aria-pressed="true">₹ INR</button>
+            <button data-cur="USD" aria-pressed="false">$ USD</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="plans">
+        <article class="plan rv">
+          <h3>Launch</h3>
+          <div class="sub">A sharp one-page site to get online fast.</div>
+          <div class="price"><span data-inr="9999">9,999</span></div>
+          <ul>
+            <li>1 landing page, fully responsive</li>
+            <li>Contact form and WhatsApp button</li>
+            <li>Basic SEO and speed tuning</li>
+            <li>2 rounds of revisions</li>
+            <li>Delivered in 5 days</li>
+          </ul>
+          <a class="btn ghost" href="#contact" data-plan="Launch">Start with Launch</a>
+        </article>
+
+        <article class="plan pop rv">
+          <span class="tag">Most chosen</span>
+          <h3>Business</h3>
+          <div class="sub">A complete multi-page site that builds trust.</div>
+          <div class="price"><span data-inr="24999">24,999</span></div>
+          <ul>
+            <li>Up to 6 custom-designed pages</li>
+            <li>Animations and interactive sections</li>
+            <li>Blog or CMS-ready structure</li>
+            <li>SEO, analytics and Google Maps</li>
+            <li>3 rounds of revisions</li>
+            <li>Delivered in 14 days</li>
+          </ul>
+          <a class="btn" href="#contact" data-plan="Business">Choose Business</a>
+        </article>
+
+        <article class="plan rv">
+          <h3>Platform</h3>
+          <div class="sub">Custom web apps, portals and dashboards.</div>
+          <div class="price"><span data-inr="59999">59,999</span><small> and up</small></div>
+          <ul>
+            <li>Login, roles and admin panel</li>
+            <li>Database design (PHP/MySQL or Node)</li>
+            <li>Online payments and reports</li>
+            <li>Security hardening and backups</li>
+            <li>Training and documentation</li>
+            <li>Delivered in 30 days or less</li>
+          </ul>
+          <a class="btn ghost" href="#contact" data-plan="Platform">Discuss Platform</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:10px">
+    <div class="wrap two">
+      <div class="box rv">
+        <h3><span class="ms" style="color:var(--v)">extension</span> Add-ons</h3>
+        <div class="sub" style="color:var(--mute);margin-bottom:8px">Mix into any plan.</div>
+        <div class="line"><span>Payment gateway integration</span><b data-inr="7500"></b></div>
+        <div class="line"><span>Extra page</span><b data-inr="2500"></b></div>
+        <div class="line"><span>Logo and brand kit</span><b data-inr="4000"></b></div>
+        <div class="line"><span>Domain and hosting setup</span><b data-inr="2000"></b></div>
+        <div class="line"><span>Content writing, per page</span><b data-inr="1500"></b></div>
+        <div class="line"><span>Hourly work, anything else</span><b><span data-inr="800"></span>/hr</b></div>
+      </div>
+
+      <div class="box rv">
+        <h3><span class="ms" style="color:var(--m)">health_and_safety</span> Monthly care plans</h3>
+        <div class="sub" style="color:var(--mute)">Updates, backups, uptime checks and fixes after launch.</div>
+        <div class="care">
+          <div><b data-inr="999"></b><span>Basic<br>2 edits a month</span></div>
+          <div><b data-inr="2499"></b><span>Growth<br>8 edits &amp; reports</span></div>
+          <div><b data-inr="4999"></b><span>Priority<br>Same-day fixes</span></div>
+        </div>
+        <div class="line" style="margin-top:16px"><span>Payment terms</span><b>50% to start, 50% on delivery</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="estimate">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <span class="eyebrow"><span class="ms" style="font-size:15px">calculate</span> Interactive</span>
+          <h2>Build your own estimate.</h2>
+          <p class="lead">Choose a base plan and add-ons. The total updates instantly.</p>
+        </div>
+      </div>
+      <div class="est">
+        <div class="box rv">
+          <div class="seg" id="base" role="group" aria-label="Base plan" style="margin-bottom:18px">
+            <button data-v="9999" aria-pressed="false">Launch</button>
+            <button data-v="24999" aria-pressed="true">Business</button>
+            <button data-v="59999" aria-pressed="false">Platform</button>
+          </div>
+          <label class="opt"><input type="checkbox" data-v="7500">Payment gateway<span data-inr="7500"></span></label>
+          <label class="opt"><input type="checkbox" data-v="2500">One extra page<span data-inr="2500"></span></label>
+          <label class="opt"><input type="checkbox" data-v="4000">Logo and brand kit<span data-inr="4000"></span></label>
+          <label class="opt"><input type="checkbox" data-v="2000">Domain and hosting setup<span data-inr="2000"></span></label>
+          <label class="opt"><input type="checkbox" data-v="4500">Care plan, first 3 months of Growth<span data-inr="4500"></span></label>
+        </div>
+        <div class="total rv">
+          <span style="font-weight:700;opacity:.9">Estimated total</span>
+          <b id="sum">0</b>
+          <span style="opacity:.88;font-size:14px;margin:4px 0 22px">Final quote confirmed after a free 20-minute call.</span>
+          <a class="btn" id="estCta" style="background:#fff;color:#4326d9;box-shadow:0 10px 24px -6px rgba(0,0,0,.25)" href="#contact">
+            <span class="ms">send</span> Get this quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div>
+          <span class="eyebrow"><span class="ms" style="font-size:15px">timeline</span> Workflow</span>
+          <h2>From idea to live in four steps.</h2>
+          <p class="lead">You see progress every few days, never a black box.</p>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step rv"><h3>Discover</h3><p>A short call or chat to agree on goals, pages and budget.</p></div>
+        <div class="step rv"><h3>Design</h3><p>You review a clickable design before any code is written.</p></div>
+        <div class="step rv"><h3>Build</h3><p>I code it, test on real phones, and share a live preview link.</p></div>
+        <div class="step rv"><h3>Launch</h3><p>Go live, hand over everything, and get 30 days of free bug fixes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap" style="max-width:800px">
+      <div class="sec-head rv" style="margin-bottom:24px">
+        <div>
+          <span class="eyebrow"><span class="ms" style="font-size:15px">help</span> FAQ</span>
+          <h2>Questions, answered.</h2>
+        </div>
+      </div>
+      <details class="rv"><summary>Is hosting included?</summary><p>Setup is included. Hosting and domain are billed by the provider, usually ₹1,500 to ₹5,000 a year for small sites.</p></details>
+      <details class="rv"><summary>Can I change the design after approval?</summary><p>Yes, within your plan’s revision rounds. Bigger changes are quoted at the hourly rate.</p></details>
+      <details class="rv"><summary>Do I own the code?</summary><p>Yes. After final payment, the code, design files and content are fully yours.</p></details>
+      <details class="rv"><summary>What if my project doesn’t fit a plan?</summary><p>Most don’t fit perfectly. Message me on WhatsApp or Gmail and I’ll give a fixed quote within 24 hours.</p></details>
+    </div>
+  </section>
+
+  <section id="pay">
+    <div class="wrap" style="max-width:800px">
+      <div class="pay-card rv">
+        <div class="pay-brand">
+          <div class="pay-ic"><span class="ms" style="font-size:28px">credit_score</span></div>
+          <div>
+            <h3>Payment Link</h3>
+            <p>Pay securely via UPI, card or net banking.</p>
+          </div>
+        </div>
+        <a class="btn" href="https://razorpay.me/@pritz100" target="_blank" rel="noopener">
+          <span class="ms">lock</span> Pay with Razorpay
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap" style="max-width:860px">
+      <div class="sec-head rv" style="margin-bottom:26px">
+        <div>
+          <span class="eyebrow"><span class="ms" style="font-size:15px">forum</span> Contact</span>
+          <h2>Let’s build yours.</h2>
+          <p class="lead">Reach out directly on WhatsApp or Gmail. You’ll hear back quickly.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="c-card wa rv">
+          <div class="c-head">
+            <div class="c-ic">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2m5.81 14.08c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.26-4.8-4.18-4.95-4.38-.15-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.59-.36.79-.36h.57c.18 0 .42-.07.66.5.24.59.82 2.02.89 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.02.97.3.15.5.22.57.34.07.12.07.7-.17 1.38Z"/></svg>
+            </div>
+            <div>
+              <span>WhatsApp</span>
+              <b>+91 8906076058</b>
+            </div>
+          </div>
+          <p>Fastest way to discuss ideas, timelines, or get a quick quote.</p>
+          <div class="c-actions">
+            <a class="btn mint" id="waLink" href="https://wa.me/918906076058?text=Hi%20Pritz%2C%20I%20would%20like%20to%20discuss%20a%20website%20project." target="_blank" rel="noopener">
+              <span class="ms">chat</span> Chat on WhatsApp
+            </a>
+            <button class="btn ghost copy-btn" data-copy="8906076058" type="button">
+              <span class="ms">content_copy</span> Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="c-card gm rv">
+          <div class="c-head">
+            <div class="c-ic">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div>
+              <span>Gmail</span>
+              <b>pritam.nics@gmail.com</b>
+            </div>
+          </div>
+          <p>Best for detailed project briefs, RFPs, documents, and formal quotes.</p>
+          <div class="c-actions">
+            <a class="btn" id="gmLink" href="mailto:pritam.nics@gmail.com?subject=Website%20project%20enquiry">
+              <span class="ms">mail</span> Email me
+            </a>
+            <button class="btn ghost copy-btn" data-copy="pritam.nics@gmail.com" type="button">
+              <span class="ms">content_copy</span> Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer>© <span id="y"></span> Pritz. Designed and coded by hand.</footer>
+
+<a class="fab" href="https://wa.me/918906076058?text=Hi%20Pritz%2C%20I%27d%20like%20to%20discuss%20a%20website." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2m5.81 14.08c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.26-4.8-4.18-4.95-4.38-.15-.2-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.59-.36.79-.36h.57c.18 0 .42-.07.66.5.24.59.82 2.02.89 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.02.97.3.15.5.22.57.34.07.12.07.7-.17 1.38Z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<footer>
+  © <span id="y"></span> Pritz. Designed and coded by hand.
+</footer>
+
 <script>
 (function(){
-var cur="INR",RATE=85,$=function(s,r){return(r||document).querySelectorAll(s)};
-function fmt(n){return cur==="INR"?"₹"+Math.round(n).toLocaleString("en-IN"):"$"+Math.round(n/RATE).toLocaleString("en-US")}
-function paint(){$("[data-inr]").forEach(function(e){e.textContent=fmt(+e.dataset.inr)});sum()}
-function sum(){var t=0;$("#base button[aria-pressed=true]").forEach(function(b){t+=+b.dataset.v});$(".opt input:checked").forEach(function(c){t+=+c.dataset.v});var s=document.getElementById("sum"),from=+s.dataset.t||0;s.dataset.t=t;var st=performance.now();(function f(n){var k=Math.min(1,(n-st)/500),v=from+(t-from)*(1-Math.pow(1-k,3));s.textContent=fmt(v);if(k<1)requestAnimationFrame(f)})(st)}
-$("[data-cur]").forEach(function(b){b.onclick=function(){cur=b.dataset.cur;$("[data-cur]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});paint()}});
-$("#base button").forEach(function(b){b.onclick=function(){$("#base button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});sum()}});
-$(".opt input").forEach(function(c){c.onchange=sum});
-$("[data-plan]").forEach(function(a){a.onclick=function(){document.getElementById("p").value=a.dataset.plan}});
-paint();
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
-$(".rv").forEach(function(e){io.observe(e)});
-$("[data-n]").forEach(function(e){var t=+e.dataset.n,st=performance.now();(function f(n){var k=Math.min(1,(n-st)/1400);e.textContent=Math.round(t*k)+(t>=40&&t!==100?"+":"");if(k<1)requestAnimationFrame(f)})(st)});
-var g=document.getElementById("glow");addEventListener("pointermove",function(e){g.style.left=e.clientX+"px";g.style.top=e.clientY+"px"});
-document.getElementById("y").textContent=new Date().getFullYear();
-var th=document.getElementById("theme");th.onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":!matchMedia("(prefers-color-scheme: light)").matches;r.dataset.theme=dark?"light":"dark"};
-var code=document.getElementById("code"),steps=[["<nav>…</nav>\n","p1"],["<header class=\"hero\">\n  <h1>Your brand</h1>\n</header>\n","p2"],["<p>Fast. Clear. Yours.</p>\n","p3"],["<section class=\"features\">\n  <div></div><div></div>\n</section>\n","p4"],["<a class=\"cta\">Book now</a>","p5"]];
-var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-function run(){var i=0,out="";code.textContent="";$(".prev>div").forEach(function(d){d.classList.remove("on")});(function next(){if(i>=steps.length){setTimeout(run,3500);return}var s=steps[i],j=0;(function ch(){if(j<s[0].length){out+=s[0][j++];code.textContent=out;setTimeout(ch,reduce?0:22)}else{document.getElementById(s[1]).classList.add("on");i++;setTimeout(next,reduce?0:350)}})()})()}
-run();
-var tw=document.getElementById("tw"),W=["look unreal.","sell for you.","load in a blink.","wow your clients."],wi=0,ci=0,dl=false;
-function ty(){var w=W[wi];ci+=dl?-1:1;tw.textContent=w.slice(0,ci);var d=dl?35:75;if(!dl&&ci===w.length){dl=true;d=1400}else if(dl&&ci===0){dl=false;wi=(wi+1)%W.length;d=350}setTimeout(ty,d)}
-if(reduce)tw.textContent=W[0];else ty();
-var wk=document.getElementById("work"),hold=false;
-function go(d){var c=wk.querySelector(".wc").offsetWidth+20;if(d>0&&wk.scrollLeft+wk.clientWidth>=wk.scrollWidth-4)wk.scrollTo({left:0,behavior:"smooth"});else wk.scrollBy({left:d*c,behavior:"smooth"})}
-document.getElementById("prev").onclick=function(){go(-1)};document.getElementById("next").onclick=function(){go(1)};
-["mouseenter","touchstart","focusin"].forEach(function(t){wk.addEventListener(t,function(){hold=true})});["mouseleave","touchend","focusout"].forEach(function(t){wk.addEventListener(t,function(){hold=false})});
-setInterval(function(){if(!hold&&!reduce)go(1)},3200);
-var pg=document.getElementById("prog");addEventListener("scroll",function(){var h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+"%"},{passive:true});
-var PAY={upi:"yourname@upi",name:"Pritz",link:"https://razorpay.me/@pritz100"},amt=document.getElementById("amt"),ub=document.getElementById("upi");
-function pl(){ub.href="upi://pay?pa="+encodeURIComponent(PAY.upi)+"&pn="+encodeURIComponent(PAY.name)+"&am="+(+amt.value||0)+"&cu=INR"}
-document.getElementById("uid").textContent=PAY.upi;amt.oninput=pl;pl();
-if(PAY.link){var pk=document.getElementById("plink");pk.href=PAY.link;pk.hidden=false}
-document.getElementById("cp").onclick=function(){try{navigator.clipboard.writeText(PAY.upi);this.textContent="✓"}catch(e){}};
-document.getElementById("f").onsubmit=function(ev){ev.preventDefault();var b=encodeURIComponent("Name: "+document.getElementById("n").value+"\nEmail: "+document.getElementById("e").value+"\nPlan: "+document.getElementById("p").value+"\n\n"+document.getElementById("m").value);location.href="mailto:yourname@email.com?subject="+encodeURIComponent("Website project enquiry")+"&body="+b;document.getElementById("ok").textContent="Opening your email app to send the details."}
+  var cur="INR",RATE=85,$=function(s,r){return(r||document).querySelectorAll(s)};
+  var selectedNote="I would like to discuss a website project.";
+
+  function fmt(n){
+    return cur==="INR"?"₹"+Math.round(n).toLocaleString("en-IN"):"$"+Math.round(n/RATE).toLocaleString("en-US");
+  }
+  function updateContactLinks(){
+    var wa=document.getElementById("waLink"),gm=document.getElementById("gmLink");
+    wa.href="https://wa.me/918906076058?text="+encodeURIComponent("Hi Pritz, "+selectedNote);
+    gm.href="mailto:pritam.nics@gmail.com?subject="+encodeURIComponent("Website project enquiry")+"&body="+encodeURIComponent("Hi Pritz,\n\n"+selectedNote);
+  }
+  function paint(){
+    $("[data-inr]").forEach(function(e){e.textContent=fmt(+e.dataset.inr)});
+    sum();
+  }
+  function sum(){
+    var t=0;
+    $("#base button[aria-pressed=true]").forEach(function(b){t+=+b.dataset.v});
+    $(".opt input:checked").forEach(function(c){t+=+c.dataset.v});
+    var s=document.getElementById("sum"),from=+s.dataset.t||0;
+    s.dataset.t=t;
+    var st=performance.now();
+    (function f(n){
+      var k=Math.min(1,(n-st)/480),v=from+(t-from)*(1-Math.pow(1-k,3));
+      s.textContent=fmt(v);
+      if(k<1)requestAnimationFrame(f);
+    })(st);
+  }
+
+  $("[data-cur]").forEach(function(b){
+    b.onclick=function(){
+      cur=b.dataset.cur;
+      $("[data-cur]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+      paint();
+    };
+  });
+  $("#base button").forEach(function(b){
+    b.onclick=function(){
+      $("#base button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+      sum();
+    };
+  });
+  $(".opt input").forEach(function(c){c.onchange=sum});
+
+  $("[data-plan]").forEach(function(a){
+    a.onclick=function(){
+      selectedNote="I am interested in the "+a.dataset.plan+" plan.";
+      updateContactLinks();
+    };
+  });
+  document.getElementById("estCta").onclick=function(){
+    var baseBtn=document.querySelector("#base button[aria-pressed=true]");
+    var planName=baseBtn?baseBtn.textContent:"Custom";
+    var total=document.getElementById("sum").textContent;
+    selectedNote="I built an estimate on your site ("+planName+" base, estimated total: "+total+").";
+    updateContactLinks();
+  };
+
+  paint();
+
+  /* Scroll Reveal */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}});
+  },{threshold:.1});
+  $(".rv").forEach(function(e){io.observe(e)});
+
+  /* Counters */
+  $("[data-n]").forEach(function(e){
+    var t=+e.dataset.n,st=performance.now();
+    (function f(n){
+      var k=Math.min(1,(n-st)/1300);
+      e.textContent=Math.round(t*k)+(t>=40&&t!==100?"+":"");
+      if(k<1)requestAnimationFrame(f);
+    })(st);
+  });
+
+  /* Cursor Glow */
+  var g=document.getElementById("glow");
+  addEventListener("pointermove",function(e){g.style.left=e.clientX+"px";g.style.top=e.clientY+"px"},{passive:true});
+
+  /* Year & Light-first Theme Toggle */
+  document.getElementById("y").textContent=new Date().getFullYear();
+  var th=document.getElementById("theme"),thIc=document.getElementById("themeIcon");
+  function syncThemeIcon(){
+    thIc.textContent=document.documentElement.dataset.theme==="dark"?"light_mode":"dark_mode";
+  }
+  syncThemeIcon();
+  th.onclick=function(){
+    var r=document.documentElement;
+    r.dataset.theme=(r.dataset.theme==="dark")?"light":"dark";
+    syncThemeIcon();
+  };
+
+  /* Material Ripple Effect */
+  document.addEventListener("pointerdown",function(e){
+    var target=e.target.closest(".btn");
+    if(!target)return;
+    var rect=target.getBoundingClientRect(),d=Math.max(rect.width,rect.height);
+    var rip=document.createElement("span");
+    rip.className="ripple";
+    rip.style.width=rip.style.height=d+"px";
+    rip.style.left=(e.clientX-rect.left-d/2)+"px";
+    rip.style.top=(e.clientY-rect.top-d/2)+"px";
+    target.appendChild(rip);
+    setTimeout(function(){rip.remove()},600);
+  });
+
+  /* Live Studio Typing */
+  var code=document.getElementById("code"),
+      steps=[["<nav>…</nav>\n","p1"],["<header class=\"hero\">\n  <h1>Your brand</h1>\n</header>\n","p2"],["<p>Fast. Clear. Yours.</p>\n","p3"],["<section class=\"grid\">\n  <div></div><div></div>\n</section>\n","p4"],["<a class=\"cta\">Launch →</a>","p5"]];
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function run(){
+    var i=0,out="";code.textContent="";
+    $(".prev>div").forEach(function(d){d.classList.remove("on")});
+    (function next(){
+      if(i>=steps.length){setTimeout(run,3500);return}
+      var s=steps[i],j=0;
+      (function ch(){
+        if(j<s[0].length){out+=s[0][j++];code.textContent=out;setTimeout(ch,reduce?0:20)}
+        else{document.getElementById(s[1]).classList.add("on");i++;setTimeout(next,reduce?0:320)}
+      })();
+    })();
+  }
+  run();
+
+  /* Headline Typewriter */
+  var tw=document.getElementById("tw"),W=["look unreal.","sell for you.","load in a blink.","wow your clients."],wi=0,ci=0,dl=false;
+  function ty(){
+    var w=W[wi];ci+=dl?-1:1;tw.textContent=w.slice(0,ci);
+    var d=dl?34:70;
+    if(!dl&&ci===w.length){dl=true;d=1400}
+    else if(dl&&ci===0){dl=false;wi=(wi+1)%W.length;d=320}
+    setTimeout(ty,d);
+  }
+  if(reduce)tw.textContent=W[0];else ty();
+
+  /* Carousel */
+  var wk=document.getElementById("workTrack"),hold=false;
+  function go(d){
+    var c=wk.querySelector(".wc").offsetWidth+20;
+    if(d>0&&wk.scrollLeft+wk.clientWidth>=wk.scrollWidth-4)wk.scrollTo({left:0,behavior:"smooth"});
+    else wk.scrollBy({left:d*c,behavior:"smooth"});
+  }
+  document.getElementById("prev").onclick=function(){go(-1)};
+  document.getElementById("next").onclick=function(){go(1)};
+  ["mouseenter","touchstart","focusin"].forEach(function(t){wk.addEventListener(t,function(){hold=true})});
+  ["mouseleave","touchend","focusout"].forEach(function(t){wk.addEventListener(t,function(){hold=false})});
+  setInterval(function(){if(!hold&&!reduce)go(1)},3400);
+
+  /* Scroll Progress */
+  var pg=document.getElementById("prog");
+  addEventListener("scroll",function(){
+    var h=document.documentElement;
+    pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+"%";
+  },{passive:true});
+
+  /* Copy Buttons & Toast */
+  var toast=document.getElementById("toast"),tt;
+  function showToast(msg){
+    toast.textContent=msg;toast.classList.add("show");
+    clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("show")},2200);
+  }
+  $(".copy-btn").forEach(function(btn){
+    btn.onclick=function(){
+      var val=btn.dataset.copy;
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(val).then(function(){showToast("Copied: "+val)});
+      }
+    };
+  });
 })();
 </script>
 </body>
