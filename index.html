@@ -72,7 +72,7 @@ button,a,summary,label{touch-action:manipulation}
 .o3{width:290px;height:290px;background:var(--pink);right:16%;bottom:-100px;opacity:.15;animation-delay:-3s}
 @keyframes float{to{transform:translate(40px,-50px) scale(1.14)}}
 main,header,footer{position:relative;z-index:1}
-.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1140px;margin:0 auto;padding-left:22px;padding-right:22px}
 
 /* Progress bar */
 #prog{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3.5px;width:0;background:linear-gradient(90deg,#1d4ed8,#e2e8f0,#b91c1c,#15803d,#d97706);z-index:75;border-radius:0 99px 99px 0}
@@ -95,8 +95,8 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
 .menu-btn{display:none}
 .mob-drawer{
   display:none;position:fixed;
-  top:calc(66px + env(safe-area-inset-top,0px));
-  left:12px;right:12px;z-index:54;
+  top:calc(68px + env(safe-area-inset-top,0px));
+  left:16px;right:16px;z-index:54;
   background:var(--surface);border:1px solid var(--line);
   border-radius:22px;padding:10px;box-shadow:var(--elev-3);
   transform:translateY(-12px) scale(.98);opacity:0;pointer-events:none;
@@ -110,11 +110,11 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
 /* Realistic Woven Tibetan Prayer Flags (Lungta) */
 .lungta-wrap{
   position:relative;overflow:hidden;
-  padding:0;
+  padding:2px 0 4px;
   perspective:900px;
 }
 .lungta-svg{
-  display:block;width:100%;min-width:860px;height:76px;
+  display:block;width:100%;height:74px;
   margin:0 auto;
   filter:drop-shadow(0 6px 8px rgba(15,23,42,.18));
 }
@@ -137,7 +137,7 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
   position:relative;overflow:hidden;
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;
-  min-height:48px;padding:12px 24px;border-radius:999px;
+  min-height:48px;padding:12px 22px;border-radius:999px;
   background:linear-gradient(135deg,var(--v),var(--v2));
   color:#fff;text-decoration:none;
   box-shadow:0 10px 26px -8px color-mix(in srgb,var(--v) 68%,transparent);
@@ -175,9 +175,9 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
   .himalaya-card:hover .himalaya-photo{transform:scale(1.04)}
 }
 
-/* Hero */
-.hero{padding:26px 0 38px;display:grid;grid-template-columns:1.06fr 1fr;gap:42px;align-items:center;position:relative}
-.badge-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px}
+/* Hero (uses padding-top/bottom only so .wrap horizontal padding is preserved!) */
+.hero{padding-top:26px;padding-bottom:38px;display:grid;grid-template-columns:1.06fr 1fr;gap:42px;align-items:center;position:relative}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
 .badge-pill{
   display:inline-flex;align-items:center;gap:8px;
   padding:6px 14px;border-radius:999px;
@@ -187,7 +187,7 @@ nav a.h:hover{color:var(--ink);background:var(--surface-2)}
 .badge-pill.sikkim{color:var(--ink);gap:6px}
 .pulse-dot{width:9px;height:9px;border-radius:50%;background:var(--m);box-shadow:0 0 0 0 color-mix(in srgb,var(--m) 70%,transparent);animation:pulse 1.8s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.hero h1{font-size:clamp(32px,5.6vw,62px);line-height:1.06;letter-spacing:-.04em;margin:0 0 16px;font-weight:800;min-height:2.2em}
+.hero h1{font-size:clamp(32px,5.6vw,62px);line-height:1.08;letter-spacing:-.04em;margin:0 0 14px;font-weight:800;min-height:2.15em}
 .grad{background:linear-gradient(100deg,var(--m),var(--v) 48%,var(--pink),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% 100%;animation:shift 6s linear infinite}
 @keyframes shift{to{background-position:220% 0}}
 .caret{display:inline-block;width:4px;height:.82em;background:var(--v);margin-left:4px;vertical-align:-.06em;border-radius:4px;animation:blink 1s steps(1) infinite}
@@ -254,30 +254,24 @@ pre{margin:0;padding:14px;font:12px/1.6 ui-monospace,Menlo,Consolas,monospace;co
 /* Real Himalayan Prayer Flags Showcase Banner */
 .himalaya-sec{padding:10px 0 22px}
 .himalaya-card{
-  position:relative;border-radius:28px;overflow:hidden;
-  min-height:250px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;
+  position:relative;border-radius:26px;overflow:hidden;
+  min-height:245px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;
   background:linear-gradient(125deg,#1e1b4b,#312e81 45%,#0f766e);
   color:#fff;box-shadow:var(--elev-3);border:1px solid rgba(255,255,255,.2);
 }
-.himalaya-photo{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  opacity:.78;transition:transform .7s ease;
-}
-.himalaya-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(95deg,rgba(11,14,42,.88) 0%,rgba(11,14,42,.58) 54%,rgba(11,14,42,.22) 100%);
-}
-.himalaya-content{position:relative;z-index:2;padding:32px}
+.himalaya-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.78;transition:transform .7s ease}
+.himalaya-overlay{position:absolute;inset:0;background:linear-gradient(95deg,rgba(11,14,42,.88) 0%,rgba(11,14,42,.58) 54%,rgba(11,14,42,.22) 100%)}
+.himalaya-content{position:relative;z-index:2;padding:30px}
 .himalaya-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);backdrop-filter:blur(10px);padding:5px 12px;border-radius:99px;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,.22)}
-.himalaya-content h3{margin:12px 0 8px;font-size:clamp(22px,3vw,32px);line-height:1.15;letter-spacing:-.02em}
+.himalaya-content h3{margin:12px 0 8px;font-size:clamp(21px,3vw,32px);line-height:1.15;letter-spacing:-.02em}
 .himalaya-content p{margin:0;color:rgba(255,255,255,.88);font-size:15px;max-width:48ch}
 .himalaya-knot{position:relative;z-index:2;padding:24px;display:flex;justify-content:center;align-items:center}
 .knot-badge{
   background:rgba(15,18,52,.52);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.28);border-radius:22px;padding:18px 22px;
+  border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:16px 20px;
   display:flex;align-items:center;gap:14px;box-shadow:0 18px 36px rgba(0,0,0,.32);
 }
-.knot-badge strong{display:block;font-size:16px}
+.knot-badge strong{display:block;font-size:15.5px}
 .knot-badge span{font-size:12.5px;opacity:.9}
 
 /* Sections */
@@ -296,7 +290,7 @@ h2{font-size:clamp(26px,4.4vw,42px);letter-spacing:-.035em;line-height:1.12;marg
 
 /* Project Carousel with Real Photos */
 .slidewrap{position:relative}
-.work{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.work{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .work::-webkit-scrollbar{display:none}
 .wc{
   flex:0 0 min(330px,84%);scroll-snap-align:start;
@@ -306,11 +300,7 @@ h2{font-size:clamp(26px,4.4vw,42px);letter-spacing:-.035em;line-height:1.12;marg
   box-shadow:var(--elev-1);
   transition:transform .3s cubic-bezier(.2,.9,.3,1.2),box-shadow .3s,border-color .3s;
 }
-.thumb{
-  height:160px;border-radius:16px;position:relative;overflow:hidden;
-  padding:12px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;
-  background:linear-gradient(135deg,var(--v),var(--m));
-}
+.thumb{height:160px;border-radius:16px;position:relative;overflow:hidden;padding:12px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;background:linear-gradient(135deg,var(--v),var(--m))}
 .thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.76;transition:transform .5s ease}
 .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,18,52,.20) 0%,rgba(15,18,52,.66) 100%);pointer-events:none}
 .wc:nth-child(2) .thumb{background:linear-gradient(135deg,#2563eb,#f59e0b)}
@@ -425,7 +415,7 @@ details p{color:var(--mute);margin:10px 0 0;font-size:14.5px}
 .c-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
 
 /* Floating WhatsApp FAB */
-.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:55;display:inline-flex;align-items:center;gap:9px;padding:13px 18px;border-radius:999px;background:#16a34a;color:#fff;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 14px 32px -6px rgba(22,163,74,.55);transition:transform .22s,box-shadow .22s}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:inline-flex;align-items:center;gap:9px;padding:13px 18px;border-radius:999px;background:#16a34a;color:#fff;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 14px 32px -6px rgba(22,163,74,.55);transition:transform .22s,box-shadow .22s}
 
 /* Toast */
 #toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:999px;font-size:14px;font-weight:700;z-index:90;box-shadow:var(--elev-3);transition:.25s}
@@ -452,22 +442,23 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
   .f3{right:6px}
 }
 @media (max-width:600px){
-  .wrap{padding:0 16px}
-  nav .wrap{height:58px;gap:8px}
+  .wrap{padding-left:18px;padding-right:18px}
+  nav .wrap{height:58px;gap:8px;padding-left:16px;padding-right:16px}
   nav .btn{padding:8px 14px;min-height:40px;font-size:13.5px}
-  .mob-drawer{top:calc(62px + env(safe-area-inset-top,0px))}
-  .lungta-svg{height:58px}
-  section{padding:50px 0}
-  .hero{padding:18px 0 30px;gap:22px}
-  .hero h1{min-height:2.4em}
+  .mob-drawer{top:calc(64px + env(safe-area-inset-top,0px))}
+  .lungta-svg{height:60px}
+  section{padding:48px 0}
+  .hero{padding-top:14px;padding-bottom:30px;gap:24px}
+  .hero h1{min-height:2.05em;margin-bottom:12px}
   .hero p{font-size:15.5px;margin-bottom:20px}
   .hero .row .btn{flex:1 1 140px}
-  .stats{gap:8px;margin-top:20px}
-  .stat-card{flex-direction:column;align-items:flex-start;gap:6px;padding:12px 10px;border-radius:16px}
+  .stats{gap:10px;margin-top:22px}
+  .stat-card{flex-direction:column;align-items:flex-start;gap:6px;padding:12px 11px;border-radius:16px}
   .stat-ic{width:32px;height:32px;border-radius:10px}
   .stat-ic .ms{font-size:18px}
   .stat-card b{font-size:19px}
   .stat-card span{font-size:11px}
+  .hero-visual{margin-top:4px}
   .fl{display:none}
   .split{grid-template-columns:1fr;min-height:auto}
   pre{border-right:0;border-bottom:1px solid var(--line);font-size:11.5px;padding:12px 14px;min-height:110px}
@@ -549,7 +540,6 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
         <stop offset="100%" stop-color="#fff" stop-opacity=".08"/>
       </linearGradient>
     </defs>
-    <!-- Hemp cord -->
     <path d="M-10,6 Q300,24 600,10 T1210,7" fill="none" stroke="#8c755b" stroke-width="2.4"/>
     <path d="M-10,6 Q300,24 600,10 T1210,7" fill="none" stroke="#c8b49b" stroke-width="1" stroke-dasharray="4 4"/>
     <g id="flagsGroup" filter="url(#cottonWeave)"></g>
@@ -580,7 +570,7 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
         </div>
         <div class="stat-card">
           <div class="stat-ic"><span class="ms">devices</span></div>
-          <div><b data-n="100">0</b><span>% Mobile-ready</span></div>
+          <div><b data-n="100">0</b><span>Mobile-ready</span></div>
         </div>
       </div>
     </div>
@@ -1058,7 +1048,6 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
   /* Render Realistic Woodblock-Printed Woven Tibetan Prayer Flags (Lungta) */
   var fg=document.getElementById("flagsGroup");
   if(fg){
-    /* Authentic natural dye colors: Sky Blue, Raw Cotton White, Madder Red, Herbal Green, Saffron Ochre */
     var dyes=[
       {bg:"#1e4e9c",ink:"rgba(15,15,20,0.62)"},
       {bg:"#f1ecdf",ink:"rgba(25,25,30,0.60)"},
@@ -1074,7 +1063,6 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
       var g=document.createElementNS(svgNS,"g");
       g.setAttribute("class","cloth-flag");
 
-      /* Natural slightly irregular cotton cloth silhouette with frayed lower edge */
       var cloth=document.createElementNS(svgNS,"path");
       var w=43, h=46;
       var pathD="M"+x+","+y+" L"+(x+w)+","+(y+1)+" L"+(x+w-1)+","+(y+h-2)+" "+
@@ -1084,19 +1072,16 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
       cloth.setAttribute("d",pathD);
       cloth.setAttribute("fill",d.bg);
 
-      /* Fabric fold shading */
       var shade=document.createElementNS(svgNS,"path");
       shade.setAttribute("d",pathD);
       shade.setAttribute("fill","url(#foldShade)");
 
-      /* Woodblock ink outer double-border + corner ties */
       var frame=document.createElementNS(svgNS,"rect");
       frame.setAttribute("x",x+4.5); frame.setAttribute("y",y+5);
       frame.setAttribute("width",w-10); frame.setAttribute("height",h-12);
       frame.setAttribute("fill","none");
       frame.setAttribute("stroke",d.ink); frame.setAttribute("stroke-width","0.75");
 
-      /* Woodblock mantra lines (upper & lower text blocks) */
       var inkGroup=document.createElementNS(svgNS,"g");
       inkGroup.setAttribute("stroke",d.ink);
       inkGroup.setAttribute("stroke-width","0.7");
@@ -1109,7 +1094,6 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
         inkGroup.appendChild(ln);
       });
 
-      /* Central Wind Horse / Dharma emblem woodblock stamp */
       var stamp=document.createElementNS(svgNS,"circle");
       stamp.setAttribute("cx",x+w/2-0.5); stamp.setAttribute("cy",y+23); stamp.setAttribute("r","6.5");
       stamp.setAttribute("fill","none"); stamp.setAttribute("stroke",d.ink); stamp.setAttribute("stroke-width","0.85");
@@ -1118,7 +1102,6 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
       cross.setAttribute("d","M"+(cx-4)+","+cy+" L"+(cx+4)+","+cy+" M"+cx+","+(cy-4)+" L"+cx+","+(cy+4)+" M"+(cx-2.5)+","+(cy-2.5)+" L"+(cx+2.5)+","+(cy+2.5)+" M"+(cx+2.5)+","+(cy-2.5)+" L"+(cx-2.5)+","+(cy+2.5));
       cross.setAttribute("stroke",d.ink); cross.setAttribute("stroke-width","0.7");
 
-      /* Top rope knot tie */
       var tie=document.createElementNS(svgNS,"circle");
       tie.setAttribute("cx",x+2); tie.setAttribute("cy",y+1); tie.setAttribute("r","1.5");
       tie.setAttribute("fill","#735f48");
@@ -1225,7 +1208,7 @@ footer{border-top:1px solid var(--line);padding:26px 20px;color:var(--mute);text
     var t=+e.dataset.n,st=performance.now();
     (function f(n){
       var k=Math.min(1,(n-st)/1300);
-      e.textContent=Math.round(t*k)+(t>=40&&t!==100?"+":"");
+      e.textContent=Math.round(t*k)+(t===100?"%":(t>=40?"+":""));
       if(k<1)requestAnimationFrame(f);
     })(st);
   });
